@@ -1,0 +1,10 @@
+.DS_Store
+
+# Personal material dropped into the workspace. Keep it out of version control.
+inbox/*
+!inbox/README.md
+!inbox/processed/
+inbox/processed/*
+!inbox/processed/.gitkeep
+reference/resumes/originals/*
+!reference/resumes/originals/.gitkeep
