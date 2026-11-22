@@ -5,23 +5,23 @@
 # person's career history. Blank starter files live in templates/ instead.
 # A guard (scripts/check-personal-data.sh) also blocks these in commits and CI.
 # ---------------------------------------------------------------------------
-profile/
-jobs/*
-!jobs/_template/
-ventures/*
-!ventures/README.md
-inbox/*
-!inbox/README.md
-!inbox/processed/
-inbox/processed/*
-!inbox/processed/.gitkeep
-reference/interview-answers.md
-reference/resumes/*
-!reference/resumes/README.md
-!reference/resumes/originals/
-reference/resumes/originals/*
-!reference/resumes/originals/.gitkeep
+/profile/
+/jobs/*
+!/jobs/_template/
+/ventures/*
+!/ventures/README.md
+/inbox/*
+!/inbox/README.md
+!/inbox/processed/
+/inbox/processed/*
+!/inbox/processed/.gitkeep
+/reference/interview-answers.md
+/reference/resumes/*
+!/reference/resumes/README.md
+!/reference/resumes/originals/
+/reference/resumes/originals/*
+!/reference/resumes/originals/.gitkeep
 
 # Local tool settings and personal instruction files
-.claude/settings.local.json
+/.claude/settings.local.json
 CLAUDE.local.md
