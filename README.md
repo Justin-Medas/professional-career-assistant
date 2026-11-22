@@ -100,7 +100,12 @@ A side business, consulting practice, or anything else you want help with: tell 
 
 ## Keep your copy private
 
-Once you run setup, this workspace holds your real career history, contact details, and job applications. Do not push a populated copy to a public repository. The `.gitignore` excludes `inbox/` and `reference/resumes/originals/`, but `profile/`, `jobs/`, and `reference/` will contain personal data after setup. If you want version control for your own copy, use a private repository.
+Once you run setup, this workspace holds your real career history, contact details, and job applications. These live only in folders that git ignores: `profile/`, `jobs/`, `inbox/`, `ventures/`, `reference/resumes/`, and `reference/interview-answers.md`. "Ignored" means git will not track or upload them, so you can commit or share improvements to the shared files without your personal data going along. A check (`scripts/check-personal-data.sh`, run by a commit hook and on GitHub) blocks any commit that includes those paths.
+
+Two limits to know:
+
+- Git-ignored also means git does not back them up. Keep your own backup, such as Time Machine or a private repository for just those folders.
+- Do not zip up or copy the whole folder to a public place, since the personal files are still on your disk.
 
 ## License
 
