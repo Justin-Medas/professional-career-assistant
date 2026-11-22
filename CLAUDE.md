@@ -37,7 +37,7 @@ reference/
   interview-toolkit.md        Questions to ask, follow-up email templates, checklists.
   study-guide-template.html   Template the study-guide skill fills in. Do not edit per job.
 examples/
-  sample-study-guide-frontend-platform.html   Finished sample guide (fictional, engineering). Show it to users; never reuse its content.
+  sample-study-guide-software-engineer.html   Finished sample guide (fictional, engineering). Show it to users; never reuse its content.
 .claude/
   skills/                     Workflow entry points, each wrapping a playbook: setup, process-inbox,
                               start-session, new-application, tailor-resume, interview-prep,
