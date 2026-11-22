@@ -73,7 +73,7 @@ After you practice or share new material, ask it to update the guide.
 
 ## How it stays accurate
 
-The assistant never invents facts. Anything it is unsure about becomes a question in `profile/open-questions.md`. Corrections you make are written back into your profile. Every change is logged in `CHANGELOG.md`. It never sends an email or message without your explicit yes.
+The assistant never invents facts. Anything it is unsure about becomes a question in `profile/open-questions.md`. Corrections you make are written back into your profile. Every change is logged in `profile/changelog.md`. It never sends an email or message without your explicit yes.
 
 ## Optional connectors
 
@@ -87,6 +87,8 @@ If your Claude setup has Google Drive, Gmail, or a browser extension connected, 
 - `.claude/skills/` and `.claude/agents/` are shortcuts into those playbooks. The assistant picks them for you; you can also type a skill name such as `/study-guide`.
 - `reference/study-guide-template.html` is the template every study guide is filled into.
 - Change a process by editing the playbook. The skills point to it.
+- `templates/` holds blank starter files. Setup copies them into `profile/` and `reference/`, which are git-ignored, so your personal data can never be committed with the shared code. A guard in `scripts/` and `.github/` blocks it even if someone tries.
+- `profile/overrides.md` is where your own preferences and tweaks go. It is yours alone.
 
 ## Adding other domains
 

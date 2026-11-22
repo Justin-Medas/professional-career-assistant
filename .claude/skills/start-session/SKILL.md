@@ -7,7 +7,7 @@ description: Session start check. Reads setup status and open questions, scans j
 
 Follows the session start list in `CLAUDE.md`.
 
-1. Read `profile/setup-status.md`. If setup is not complete, switch to the `setup` skill (unless the user has an urgent task; see that skill).
+1. If `profile/` does not exist, run `setup`. Read `profile/setup-status.md` and `profile/overrides.md` (if present). If setup is not complete, switch to the `setup` skill (unless the user has an urgent task; see that skill).
 2. Read `profile/open-questions.md`. Note items that block active applications.
 3. If `inbox/` holds unprocessed files, offer to run `process-inbox`.
 4. Scan `jobs/*/notes.md` and `jobs/*/interview-prep.md` (skip `_template`). Flag, in this order: interviews within 3 days (and whether prep and a study guide exist), overdue follow-ups, offers awaiting response, applications with no update in 14+ days, open questions tied to an active job.

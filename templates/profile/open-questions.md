@@ -1,6 +1,6 @@
 # Open Questions: Interview Queue
 
-Ordered by impact. Resolve, move the answer to the canonical file, delete the item, log in CHANGELOG.
+Ordered by impact. Resolve, move the answer to the canonical file, delete the item, log in the changelog.
 
 Item format:
 `N. **Short title.** What is unknown. Why it matters / what it blocks. (asked <date> | skipped <date>)`

@@ -5,13 +5,14 @@ You are this user's professional assistant. This workspace is a living system: y
 ## Session start (every session)
 
 1. Read this file.
-2. Read `profile/setup-status.md`.
+2. Read `profile/setup-status.md`. If `profile/` does not exist yet (a fresh copy), create it first by copying `templates/profile/*` into `profile/` and `templates/reference/interview-answers.md` into `reference/` (never overwrite an existing file), then run setup.
    - If `state` is `not-started` or `in-progress`: run `playbooks/onboarding.md` from the first unfinished step before doing anything else. If the user arrives with an urgent task, do the minimum onboarding needed for it (steps 1 to 3), do the task, then offer to finish setup.
    - If `state` is `complete`: continue below.
-3. Read `profile/open-questions.md`. If any open item is relevant to today's task, raise it.
-4. If the task involves a resume or application, read `profile/career-history.md`, `profile/positioning.md`, `profile/voice-and-style.md`, and `playbooks/resume-tailoring.md` before writing anything.
-5. Scan `jobs/*/notes.md` and `jobs/*/interview-prep.md` for interviews within 3 days, overdue follow-ups, or an offer awaiting response. Raise these first.
-6. Check `inbox/`. If it holds unprocessed files, process them per `playbooks/source-ingestion.md` before proceeding.
+3. Read `profile/overrides.md` if it exists. It is this user's personal layer (preferences, narratives, defaults, role-family notes). Apply it on top of this file and the playbooks; where it conflicts with them, it wins.
+4. Read `profile/open-questions.md`. If any open item is relevant to today's task, raise it.
+5. If the task involves a resume or application, read `profile/career-history.md`, `profile/positioning.md`, `profile/voice-and-style.md`, and `playbooks/resume-tailoring.md` before writing anything.
+6. Scan `jobs/*/notes.md` and `jobs/*/interview-prep.md` for interviews within 3 days, overdue follow-ups, or an offer awaiting response. Raise these first.
+7. Check `inbox/`. If it holds unprocessed files, process them per `playbooks/source-ingestion.md` before proceeding.
 
 ## Workspace map
 
@@ -20,7 +21,9 @@ CLAUDE.md                     This file. Operating instructions.
 AGENTS.md                     Pointer for tools that read AGENTS.md (for example ChatGPT's Codex) to CLAUDE.md and the skills.
 index.html                    Simple start page for non-technical users, published with GitHub Pages.
 README.md                     Human quickstart. Not for you to maintain beyond the map.
-CHANGELOG.md                  Log of every self-heal update (what changed, why, date).
+CHANGELOG.md                  Project changelog: changes to this shared repo. Not the user's log.
+templates/                    Blank starter files copied into the git-ignored personal paths at setup.
+scripts/, .githooks/, .github/  Guard that blocks personal data from being committed (see Personal data below).
 inbox/                        Drop zone. User puts resumes, LinkedIn export, notes here.
   processed/                  Files already ingested (moved here, never deleted).
 profile/
@@ -29,6 +32,8 @@ profile/
   positioning.md              Goals, target roles, differentiators, narrative strategy.
   voice-and-style.md          Writing rules for anything in the user's voice.
   open-questions.md           Interview queue: gaps, conflicts, stale facts to resolve.
+  overrides.md                Personal layer applied on top of the playbooks (preferences, narratives, role-family notes).
+  changelog.md                The user's log of every self-heal update (what changed, why, date).
 reference/
   resumes/originals/          Untouched copies of past resumes (historical, may be stale).
   resumes/summary.md          Distilled snapshots of past resumes (created during ingestion).
@@ -99,7 +104,15 @@ If a request does not match a row, just help directly and keep the workspace acc
 ## Domains
 
 - **Career management** (active by default): resumes, applications, positioning, interview prep, job-search strategy.
-- **Ventures** (optional): anything else the user wants to run from here. New domains get their own folder under `ventures/` or a new top-level folder, an entry in the map above, and a CHANGELOG entry.
+- **Ventures** (optional): anything else the user wants to run from here. New domains get their own folder under `ventures/` or a new top-level folder, an entry in the map above, and a changelog entry.
+
+## Personal data and the shared repo
+
+This folder may be a clone of a public repository that many people use. Anything about a real person lives only in git-ignored paths: `profile/`, `jobs/` (except `_template/`), `inbox/`, `ventures/` (except its README), `reference/interview-answers.md`, `reference/resumes/` (except its README), and local settings. Rules:
+
+- Improvements to shared files (`CLAUDE.md`, `playbooks/`, `.claude/`, `templates/`, `reference/` templates, `examples/`, `README.md`, `index.html`) must be generic. No names, employers, metrics, or personal preferences. Personal tweaks go in `profile/overrides.md`.
+- Never `git add -f` a personal path. `scripts/check-personal-data.sh` blocks it in commits (enable once with `git config core.hooksPath .githooks`) and in CI.
+- Never commit, push, or open a pull request without the user's explicit yes.
 
 ## Conventions
 

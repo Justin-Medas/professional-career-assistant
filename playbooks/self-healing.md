@@ -15,10 +15,10 @@ The workspace continuously reshapes itself around what is known about the user. 
 
 1. Put the fact in exactly one canonical place. `career-history.md` for facts about roles and accomplishments, `positioning.md` for strategy and goals, `voice-and-style.md` for writing preferences.
 2. Convert relative dates to absolute ("last spring" becomes the year or month).
-3. If the new fact contradicts an existing one, do not silently overwrite. Ask, or if the user is clearly correcting the record, update and note the supersession in CHANGELOG.md.
+3. If the new fact contradicts an existing one, do not silently overwrite. Ask, or if the user is clearly correcting the record, update and note the supersession in profile/changelog.md.
 4. If the fact is plausible but unverified (a metric the user half-remembers), record it with an `(unverified)` tag and add a verification item to `open-questions.md`. Unverified facts never go on a resume.
 5. Attach a provenance tag (see `playbooks/source-ingestion.md`).
-6. Append one line to `CHANGELOG.md`: date, what changed, why.
+6. Append one line to `profile/changelog.md`: date, what changed, why.
 
 ## Structural healing
 
@@ -27,7 +27,7 @@ Beyond facts, evolve the structure itself:
 - If a category of information keeps coming up with no home, create a file for it and add it to the map in CLAUDE.md.
 - If a playbook step repeatedly proves wrong or gets overridden by the user, rewrite the playbook.
 - If a profile file grows unwieldy (roughly 400+ lines), split it and update the map.
-- Every structural change gets a CHANGELOG entry.
+- Every structural change gets a changelog entry.
 
 ## Staleness
 
@@ -39,4 +39,4 @@ Do not persist health details, government ID numbers, financial account numbers,
 
 ## Consolidation
 
-Every so often (about every 20 CHANGELOG entries), do a pass: merge duplicate bullets in `career-history.md`, prune resolved items from `open-questions.md`, and collapse older CHANGELOG lines into a summary if the file exceeds ~300 lines.
+Every so often (about every 20 changelog entries), do a pass: merge duplicate bullets in `career-history.md`, prune resolved items from `open-questions.md`, and collapse older changelog lines into a summary if the file exceeds ~300 lines.
