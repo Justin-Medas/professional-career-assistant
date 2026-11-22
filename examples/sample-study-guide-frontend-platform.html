@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sample Study Guide: Frontend Platform Panel</title>
+<!--
+  STUDY GUIDE TEMPLATE. Process: playbooks/study-guide.md
+
+  To build a guide: copy this file into the job folder (for example
+  jobs/<company>-<role>/study-guide.html) and replace ONLY the JSON inside
+  <script id="guide-data">. Do not edit the CSS or the renderer script.
+
+  JSON rules:
+  - Plain text only in every string. No HTML. The page escapes everything.
+  - Escape the less-than sign as < so a stray "</script>" cannot end the block.
+  - Every section is optional. A tab appears only when its data exists.
+  - Keep ids and titles stable between edits so saved progress survives.
+
+  Everything works offline from a double-click. Progress (flashcards, ratings,
+  notes, checkboxes) saves in the browser on this computer only.
+-->
+<style>
+:root {
+  --bg: #f5f6f8; --surface: #ffffff; --ink: #16202a; --muted: #5b6876; --line: #d9dfe5;
+  --accent: #1f5fbf; --accent-ink: #ffffff; --accent-soft: #e3edfb;
+  --warn: #8a5200; --warn-soft: #fbeccd; --good: #1b7048; --good-soft: #d9f1e3; --bad: #a63a3a; --bad-soft: #f8dcdc;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f151c; --surface: #17212b; --ink: #e8eef3; --muted: #9aa8b5; --line: #2b3a47;
+    --accent: #6ea8ff; --accent-ink: #07111f; --accent-soft: #14283f;
+    --warn: #f0b45a; --warn-soft: #3a2c12; --good: #5fcf94; --good-soft: #12301f; --bad: #ef8a8a; --bad-soft: #3a1a1a;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.55 var(--font);
+  padding: 0 max(16px, env(safe-area-inset-right, 0px)) 56px max(16px, env(safe-area-inset-left, 0px)); }
+h1, h2, h3 { line-height: 1.2; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(1.7rem, 5vw, 2.4rem); }
+h2 { font-size: 1.35rem; margin-bottom: 10px; }
+h3 { font-size: 1.02rem; margin-bottom: 6px; }
+p { margin: 0 0 10px; max-width: 70ch; }
+ul, ol { margin: 0 0 10px; padding-left: 1.2rem; max-width: 70ch; }
+li { margin-bottom: 4px; }
+.wrap { max-width: 1040px; margin: 0 auto; }
+.eyebrow { font: 600 0.72rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+header.top { padding: 28px 0 14px; }
+header.top p { color: var(--muted); margin-top: 8px; }
+nav.tabs { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line);
+  display: flex; gap: 4px; overflow-x: auto; padding: 8px 0; }
+nav.tabs button { font: 500 0.92rem var(--font); color: var(--muted); background: transparent; border: 1px solid transparent;
+  border-radius: 6px; padding: 8px 14px; cursor: pointer; white-space: nowrap; }
+nav.tabs button[aria-selected="true"] { color: var(--accent-ink); background: var(--accent); }
+nav.tabs button:hover:not([aria-selected="true"]) { border-color: var(--line); color: var(--ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+main { padding-top: 22px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin-bottom: 14px; }
+.grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); margin-bottom: 14px; }
+.grid .card { margin: 0; }
+.big { font-size: 1.7rem; font-weight: 700; color: var(--accent); line-height: 1.1; }
+.muted { color: var(--muted); }
+.pill { display: inline-block; font: 600 0.72rem var(--mono); padding: 3px 8px; border-radius: 99px; background: var(--accent-soft); color: var(--accent); }
+.pill.good { background: var(--good-soft); color: var(--good); }
+.pill.warn { background: var(--warn-soft); color: var(--warn); }
+.pill.bad { background: var(--bad-soft); color: var(--bad); }
+table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+th { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+.btn { font: 500 0.92rem var(--font); background: var(--surface); color: var(--ink); border: 1px solid var(--line);
+  border-radius: 6px; padding: 8px 14px; cursor: pointer; }
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn.good { background: var(--good-soft); color: var(--good); border-color: var(--good); }
+.btn.bad { background: var(--bad-soft); color: var(--bad); border-color: var(--bad); }
+.btn[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+select, textarea { font: 400 0.95rem var(--font); background: var(--surface); color: var(--ink); border: 1px solid var(--line);
+  border-radius: 6px; padding: 8px 10px; }
+textarea { width: 100%; min-height: 110px; resize: vertical; }
+.flash { min-height: 190px; display: flex; flex-direction: column; justify-content: center; gap: 12px; }
+.flash .q { font-size: 1.3rem; font-weight: 600; }
+.flash .a { border-top: 1px dashed var(--line); padding-top: 12px; }
+.bar { display: flex; height: 38px; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); margin-bottom: 12px; }
+.bar div { display: flex; align-items: center; justify-content: center; font: 600 0.75rem var(--font); color: var(--accent-ink);
+  overflow: hidden; white-space: nowrap; padding: 0 4px; }
+.bar div.now { outline: 3px solid var(--warn); outline-offset: -3px; }
+.clock { font: 600 2rem/1 var(--mono); }
+.split { display: grid; gap: 14px; grid-template-columns: 1fr; }
+@media (min-width: 760px) { .split { grid-template-columns: 300px 1fr; } }
+.qlist { display: flex; flex-direction: column; gap: 6px; }
+.qlist button { text-align: left; font: 400 0.92rem/1.35 var(--font); background: var(--surface); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; cursor: pointer; }
+.qlist button[aria-current="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.check { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.check input { margin-top: 5px; width: 18px; height: 18px; flex: none; }
+.check.done span.t { text-decoration: line-through; color: var(--muted); }
+footer { margin-top: 30px; color: var(--muted); font-size: 0.85rem; }
+@media print { nav.tabs, .btn, footer { display: none !important; } body { background: #fff; } .card { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow" id="eyebrow"></div>
+    <h1 id="title"></h1>
+    <p id="subtitle"></p>
+  </header>
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Sections"></nav>
+  <main id="main" tabindex="-1"></main>
+  <footer>Progress saves in this browser only. <button class="btn" id="resetall" type="button">Reset all progress</button></footer>
+</div>
+
+<script type="application/json" id="guide-data">
+{
+  "id": "sample-frontend-platform-panel",
+  "title": "SAMPLE: Frontend platform panel interview",
+  "eyebrow": "Sample guide with fictional details. Your guide is built from your own interview.",
+  "subtitle": "A 60-minute panel for a Director of Frontend Platform at a fictional company, Acme Cloud. Shows what a finished guide looks like for an engineering role.",
+  "answerSeconds": 90,
+  "overview": {
+    "summary": "A panel of three will test how you make technical decisions for a shared UI platform: architecture, design systems, and getting other teams to adopt what you build. They care less about the right answer than about the trade-offs you name and what you would do first.",
+    "points": [
+      {
+        "h": "Decisions, not definitions",
+        "body": "Answer with a choice, the option you rejected, and the cost you accepted. Skip the textbook tour."
+      },
+      {
+        "h": "Adoption is the hard part",
+        "body": "A platform nobody uses has failed. Pair every technical answer with how teams would actually adopt it."
+      },
+      {
+        "h": "Be honest about edges",
+        "body": "Say what you have built, what you have only studied, and how you would learn the rest."
+      }
+    ],
+    "audience": [
+      {
+        "who": "Staff Engineer",
+        "focus": "Architecture depth and trade-offs",
+        "tip": "Expect follow-ups on failure modes. Name one real risk early."
+      },
+      {
+        "who": "Engineering Director",
+        "focus": "Scope, org design, measurement",
+        "tip": "Tie decisions to team outcomes and how you would measure them."
+      },
+      {
+        "who": "Product Partner",
+        "focus": "Collaboration and delivery pace",
+        "tip": "Lead with what is in it for their team, then the mechanism."
+      }
+    ],
+    "numbers": [
+      {
+        "label": "Panel length",
+        "value": "60 min",
+        "note": "Plan for 10 minutes of your own questions"
+      },
+      {
+        "label": "Answer target",
+        "value": "90 sec",
+        "note": "Headline, evidence, takeaway. Then stop."
+      },
+      {
+        "label": "LCP good threshold",
+        "value": "2.5 s",
+        "note": "Core Web Vitals, at the 75th percentile"
+      },
+      {
+        "label": "INP good threshold",
+        "value": "200 ms",
+        "note": "Interaction to Next Paint replaced FID in 2024"
+      }
+    ]
+  },
+  "concepts": [
+    {
+      "title": "Micro-frontends and module federation",
+      "body": [
+        "A micro-frontend splits a large web app into pieces that separate teams build and ship independently. Module Federation (a Webpack 5 feature) lets one app, the host, load code from another, a remote, at runtime instead of at build time.",
+        "The hard part is shared dependencies. If two pieces each bring their own copy of a framework, pages get heavier and some frameworks break when two copies run together."
+      ],
+      "bullets": [
+        "Host: the shell that loads others. Remote: a piece that exposes modules.",
+        "Shared singleton: one copy of a framework used by everyone, which needs a version policy.",
+        "Native Federation and import maps are bundler-independent alternatives."
+      ]
+    },
+    {
+      "title": "Version skew",
+      "body": [
+        "Skew is when pieces built at different times expect different versions of something they share. It shows up as subtle runtime errors, not build failures."
+      ],
+      "bullets": [
+        "Strategy 1: the shell owns the framework runtime and publishes a support window (for example, current and previous major).",
+        "Strategy 2: isolate pieces as web components so each can bundle its own copy, at the cost of size.",
+        "Guardrails: contract tests between shell and remotes, canary releases, and a rollback path."
+      ]
+    },
+    {
+      "title": "Design systems in layers",
+      "body": [
+        "A design system is shared parts plus the rules for using them. Atomic design is a useful vocabulary: atoms (a button), molecules (a search field), organisms (a header), templates, pages.",
+        "Design tokens are named design decisions, such as color or spacing, stored as data. Tiering them (primitive, semantic, component) lets a theme change without touching components."
+      ],
+      "bullets": [
+        "Export tokens as CSS custom properties so any framework, including legacy, gets visual consistency.",
+        "Ship components as web components or per-framework wrappers for deeper reuse.",
+        "Govern with an intake process: how a team proposes, reviews, and contributes a component."
+      ]
+    },
+    {
+      "title": "Migrating a legacy app without a rewrite",
+      "body": [
+        "The strangler fig pattern replaces a legacy system piece by piece. A router sends some URLs to the new system and the rest to the old one, and the share shifts over time."
+      ],
+      "bullets": [
+        "Pick a seam: a route, a page, or a widget.",
+        "Keep a single login session across old and new.",
+        "Measure each migrated slice (speed, errors) so the case for the next one makes itself."
+      ]
+    },
+    {
+      "title": "Measuring a platform",
+      "body": [
+        "Measure adoption, speed for the developer, and quality for the user. One metric from each keeps the picture honest."
+      ],
+      "bullets": [
+        "Adoption: share of teams or screens on the platform.",
+        "Developer speed: time to first deploy for a new app, build and CI time.",
+        "User quality: Core Web Vitals (LCP, INP, CLS) and accessibility defects."
+      ]
+    }
+  ],
+  "plan": {
+    "totalMinutes": 60,
+    "blocks": [
+      {
+        "label": "Introductions",
+        "minutes": 5,
+        "notes": "Your 60 to 90 second pitch. Mention one result and why this role."
+      },
+      {
+        "label": "Architecture walkthrough",
+        "minutes": 20,
+        "notes": "One decision from your past work: options, choice, cost. Then skew and migration questions."
+      },
+      {
+        "label": "Design system deep dive",
+        "minutes": 15,
+        "notes": "Layering, tokens, governance, and how legacy apps get access."
+      },
+      {
+        "label": "Leadership scenario",
+        "minutes": 10,
+        "notes": "Convincing a reluctant team. Empathy first, then a small first step."
+      },
+      {
+        "label": "Your questions",
+        "minutes": 10,
+        "notes": "Ask 3 to 5. At least two tied to research about their platform."
+      }
+    ]
+  },
+  "cards": [
+    {
+      "topic": "Architecture",
+      "q": "What does a micro-frontend solve?",
+      "a": "It lets separate teams build, test, and release parts of one large web app independently, at the cost of coordination around shared dependencies and consistency."
+    },
+    {
+      "topic": "Architecture",
+      "q": "Host versus remote in Module Federation?",
+      "a": "The host is the app that loads code at runtime. A remote is an app that exposes modules for hosts to load."
+    },
+    {
+      "topic": "Architecture",
+      "q": "What is a shared singleton?",
+      "a": "One copy of a library, usually a UI framework, shared by every piece on the page. It avoids duplicate downloads and conflicts but requires a version policy."
+    },
+    {
+      "topic": "Architecture",
+      "q": "What is version skew?",
+      "a": "Pieces built at different times expect different versions of something they share, which causes runtime errors that build checks do not catch."
+    },
+    {
+      "topic": "Architecture",
+      "q": "Name two ways to manage skew.",
+      "a": "A shell-owned framework runtime with a published support window, and isolation through web components that bundle their own copy. Add contract tests and canaries as guardrails."
+    },
+    {
+      "topic": "Architecture",
+      "q": "What is the strangler fig pattern?",
+      "a": "Replace a legacy system gradually by routing some traffic to new code while the rest stays on old code, until the old system can be retired."
+    },
+    {
+      "topic": "Architecture",
+      "q": "What is a Backend for Frontend (BFF)?",
+      "a": "A server layer shaped for one UI's needs. It aggregates and adapts several backend services so the front end stays simple."
+    },
+    {
+      "topic": "Design system",
+      "q": "What is a design token?",
+      "a": "A named design decision stored as data, such as a color or spacing value, so it can be reused and changed in one place."
+    },
+    {
+      "topic": "Design system",
+      "q": "Why tier tokens?",
+      "a": "Primitive tokens hold raw values, semantic tokens give them meaning (such as text-primary), and component tokens bind them to parts. Themes change at the semantic tier."
+    },
+    {
+      "topic": "Design system",
+      "q": "Atomic design in one line.",
+      "a": "Build interfaces from atoms, molecules, organisms, templates, and pages, so shared parts compose from smaller ones."
+    },
+    {
+      "topic": "Design system",
+      "q": "How can a legacy app get design system value cheaply?",
+      "a": "Ship tokens as CSS custom properties. Any framework can use them, so visual consistency does not need a rewrite."
+    },
+    {
+      "topic": "Design system",
+      "q": "What does design system governance mean?",
+      "a": "The process for proposing, reviewing, versioning, and contributing components, plus who decides and how teams are supported."
+    },
+    {
+      "topic": "Quality",
+      "q": "Core Web Vitals: what are the three?",
+      "a": "Largest Contentful Paint (loading), Interaction to Next Paint (responsiveness), Cumulative Layout Shift (visual stability)."
+    },
+    {
+      "topic": "Quality",
+      "q": "Good thresholds for LCP, INP, CLS?",
+      "a": "LCP 2.5 seconds or less, INP 200 milliseconds or less, CLS 0.1 or less, measured at the 75th percentile of real users."
+    },
+    {
+      "topic": "Quality",
+      "q": "What is the normal-text contrast minimum in WCAG AA?",
+      "a": "4.5 to 1 for normal text. Large text needs 3 to 1."
+    },
+    {
+      "topic": "Delivery",
+      "q": "What does semantic versioning communicate?",
+      "a": "Major.minor.patch. A major bump signals breaking changes, minor adds features compatibly, patch fixes bugs."
+    },
+    {
+      "topic": "Delivery",
+      "q": "What is contract testing?",
+      "a": "Checking that a consumer and a provider agree on an interface, so each can change safely without full end-to-end runs."
+    },
+    {
+      "topic": "Delivery",
+      "q": "Canary release versus feature flag?",
+      "a": "A canary exposes a new version to a small share of traffic. A flag turns behavior on or off at runtime. Both limit blast radius and enable fast rollback."
+    },
+    {
+      "topic": "Leadership",
+      "q": "A team says they have no time to adopt your platform. First move?",
+      "a": "Acknowledge the deadline, ask what it would take, and offer the smallest useful first step, such as tokens only, with support."
+    },
+    {
+      "topic": "Delivery",
+      "q": "Best shape for a spoken answer?",
+      "a": "Headline first, one example with evidence, one takeaway, then stop. About 90 seconds."
+    },
+    {
+      "topic": "Trap",
+      "q": "Trap: claiming experience you only studied.",
+      "a": "Say what you built, what you studied, and how you would close the gap. Panels probe the edges."
+    }
+  ],
+  "practice": [
+    {
+      "who": "Staff Engineer",
+      "q": "Pick one significant technical decision from your platform work. What options did you consider, what did you choose, and what did it cost?",
+      "listen": [
+        "A real trade-off, not a feature list",
+        "A named rejected option and why",
+        "A cost you accepted",
+        "Which part was your decision and which was the team's"
+      ],
+      "outline": [
+        "Headline: the decision in one sentence.",
+        "Rejected option and the reason.",
+        "Mechanism in one sentence.",
+        "Cost you accepted and how you contained it.",
+        "What you would revisit."
+      ],
+      "watch": [
+        "One decision, not four.",
+        "Do not describe other teams as behind. Say they had different constraints."
+      ]
+    },
+    {
+      "who": "Staff Engineer",
+      "q": "Federated modules can hit framework version skew. What breaks, and how do you let teams upgrade independently?",
+      "listen": [
+        "Concrete failure modes",
+        "More than one strategy with its cost",
+        "A choice for this situation",
+        "Honest limits"
+      ],
+      "outline": [
+        "Headline: the risk is the shared runtime, so decide what is shared and what is isolated.",
+        "Two failure modes.",
+        "Shell-owned runtime with a support window versus isolation, with costs.",
+        "Guardrails: contract tests, canary, rollback."
+      ],
+      "watch": [
+        "Do not say static output removes the problem.",
+        "Use evidence from your own work if you have it, and label it as yours."
+      ]
+    },
+    {
+      "who": "Engineering Director",
+      "q": "You are setting up a design system for about 100 apps, many of them legacy. How do you approach it?",
+      "listen": [
+        "Layering",
+        "A packaging choice with a rejected alternative",
+        "A governance mechanism",
+        "A legacy path",
+        "A first 90 days with a pilot"
+      ],
+      "outline": [
+        "Headline: buy the basics, own what is distinctive, govern through intake.",
+        "Tokens as CSS variables for legacy reach.",
+        "Components through web components or wrappers.",
+        "Pilot with one team on a real screen, then a beta."
+      ],
+      "watch": [
+        "Ask what exists today before assuming greenfield.",
+        "Do not promise a full rewrite."
+      ]
+    },
+    {
+      "who": "Engineering Director",
+      "q": "How would you know whether the platform is working a year from now?",
+      "listen": [
+        "Adoption, developer speed, and user quality",
+        "Baselines before targets",
+        "A leading indicator",
+        "Willingness to retire what does not work"
+      ],
+      "outline": [
+        "Headline: one metric each for adoption, developer speed, and user quality.",
+        "Take a baseline in the first month.",
+        "Share the numbers openly with teams.",
+        "Name one metric you would not use and why."
+      ],
+      "watch": [
+        "Do not quote numbers you have not measured.",
+        "Avoid vanity metrics such as component count."
+      ]
+    },
+    {
+      "who": "Product Partner",
+      "q": "My team is on a legacy stack with deadlines and no spare capacity. Convince me. What is in it for my team?",
+      "listen": [
+        "Empathy first",
+        "Value for their team, not for the platform",
+        "An incremental path",
+        "How friction is handled",
+        "A measurable outcome"
+      ],
+      "outline": [
+        "Acknowledge the deadline.",
+        "One line of value with a real example.",
+        "Smallest first step with support.",
+        "How you will measure it together."
+      ],
+      "watch": [
+        "Answer what is in it for them before asking questions.",
+        "Do not imply their team is behind."
+      ]
+    },
+    {
+      "who": "Staff Engineer",
+      "q": "How would you migrate a large legacy front end without a rewrite?",
+      "listen": [
+        "Strangler pattern or equivalent",
+        "A seam to start at",
+        "Session and auth continuity",
+        "Measurement of each slice"
+      ],
+      "outline": [
+        "Headline: route traffic gradually, not all at once.",
+        "Start at a low-risk seam.",
+        "Keep one session across old and new.",
+        "Measure speed and errors per slice."
+      ],
+      "watch": [
+        "Name a rollback plan.",
+        "Avoid saying it will be quick."
+      ]
+    },
+    {
+      "who": "Engineering Director",
+      "q": "Tell me about something you built where you were less sure than you sounded. What did you do about it?",
+      "listen": [
+        "Honesty about uncertainty",
+        "A concrete way it was resolved",
+        "What changed afterward"
+      ],
+      "outline": [
+        "Situation in one sentence.",
+        "What you were unsure about.",
+        "The experiment or review you used.",
+        "The result and what you do differently now."
+      ],
+      "watch": [
+        "Choose a real example. Panels can tell."
+      ]
+    }
+  ],
+  "checklist": {
+    "fixes": [
+      {
+        "title": "Write your one decision story",
+        "detail": "Use the Practice tab outline. Practice it out loud with the timer until it fits in 90 seconds."
+      },
+      {
+        "title": "Settle your skew answer",
+        "detail": "Pick one primary strategy and know its cost."
+      },
+      {
+        "title": "Prepare your honest gap answer",
+        "detail": "For any topic you have only studied, say so and say how you would learn it."
+      },
+      {
+        "title": "Confirm the panel format",
+        "detail": "Ask the recruiter for names, titles, and the stated focus areas."
+      }
+    ],
+    "ask": [
+      "What does success look like for this role at six and twelve months?",
+      "Which teams use the platform today, and which resist it most?",
+      "How are decisions about shared components made right now?",
+      "What is the biggest technical constraint you want removed?",
+      "What would you change about how the platform team works with product teams?"
+    ],
+    "before": [
+      "Test audio, video, and screen sharing the day before.",
+      "Open your pitch, your decision story, and this guide.",
+      "Rehearse the full 60 minutes once with the Plan timer.",
+      "Have a glass of water and a notepad ready."
+    ]
+  }
+}
+</script>
+
+<script>
+(function () {
+  "use strict";
+  var DATA;
+  try { DATA = JSON.parse(document.getElementById("guide-data").textContent); }
+  catch (e) { document.body.textContent = "The study guide data could not be read: " + e.message; return; }
+
+  var KEY = "study-guide:" + (DATA.id || DATA.title || "guide");
+  var state = { cards: {}, rating: {}, notes: {}, checks: {} };
+  var timers = [];
+  var SECTION_ORDER = [
+    ["overview", "Overview"], ["concepts", "Concepts"], ["plan", "Plan and timing"],
+    ["cards", "Flashcards"], ["practice", "Practice"], ["checklist", "Checklist"]
+  ];
+
+  function load() {
+    try {
+      var s = JSON.parse(localStorage.getItem(KEY) || "null");
+      if (s) for (var k in state) if (s[k] && typeof s[k] === "object") state[k] = s[k];
+    } catch (e) {}
+  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+  function h(tag, props, kids) {
+    var n = document.createElement(tag);
+    if (props) for (var k in props) {
+      var v = props[k];
+      if (v == null || v === false) continue;
+      if (k === "class") n.className = v;
+      else if (k === "text") n.textContent = v;
+      else if (k === "style") n.style.cssText = v;
+      else if (k.slice(0, 2) === "on") n.addEventListener(k.slice(2), v);
+      else n.setAttribute(k, v === true ? "" : v);
+    }
+    (kids || []).forEach(function (c) {
+      if (c == null || c === false) return;
+      n.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
+    });
+    return n;
+  }
+  function paras(arr) { return (arr || []).map(function (t) { return h("p", { text: t }); }); }
+  function list(arr) { return arr && arr.length ? h("ul", null, arr.map(function (t) { return h("li", { text: t }); })) : null; }
+  function mmss(sec) { var m = Math.floor(sec / 60), s = sec % 60; return (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s; }
+  function clearTimers() { timers.forEach(clearInterval); timers = []; }
+
+  function makeTimer(onTick) {
+    var elapsed = 0, id = null;
+    return {
+      running: function () { return id !== null; },
+      start: function () { if (id === null) { id = setInterval(function () { elapsed++; onTick(elapsed); }, 1000); timers.push(id); } },
+      stop: function () { if (id !== null) { clearInterval(id); id = null; } },
+      reset: function () { this.stop(); elapsed = 0; onTick(0); },
+      get: function () { return elapsed; }
+    };
+  }
+
+  /* ---------- views ---------- */
+  function viewOverview(o) {
+    var root = h("div");
+    if (o.summary) root.appendChild(h("div", { class: "card" }, paras([o.summary])));
+    if (o.points && o.points.length) root.appendChild(h("div", { class: "grid" }, o.points.map(function (p) {
+      return h("div", { class: "card" }, [h("h3", { text: p.h }), h("p", { text: p.body })]);
+    })));
+    if (o.numbers && o.numbers.length) root.appendChild(h("div", { class: "grid" }, o.numbers.map(function (n) {
+      return h("div", { class: "card" }, [h("div", { class: "eyebrow", text: n.label }), h("div", { class: "big", text: n.value }), n.note ? h("p", { class: "muted", text: n.note }) : null]);
+    })));
+    if (o.audience && o.audience.length) {
+      root.appendChild(h("h2", { text: "Who you will face" }));
+      var tbl = h("table", null, [
+        h("thead", null, [h("tr", null, ["Who", "What they care about", "Tip"].map(function (t) { return h("th", { text: t }); }))]),
+        h("tbody", null, o.audience.map(function (a) {
+          return h("tr", null, [h("td", { text: a.who }), h("td", { text: a.focus }), h("td", { text: a.tip })]);
+        }))
+      ]);
+      root.appendChild(h("div", { class: "card", style: "overflow-x:auto" }, [tbl]));
+    }
+    return root;
+  }
+
+  function viewConcepts(items) {
+    return h("div", null, items.map(function (c) {
+      return h("div", { class: "card" }, [h("h2", { text: c.title })].concat(paras(c.body), [list(c.bullets)]));
+    }));
+  }
+
+  function viewPlan(plan) {
+    var blocks = plan.blocks || [];
+    var sum = blocks.reduce(function (a, b) { return a + (Number(b.minutes) || 0); }, 0);
+    var total = Number(plan.totalMinutes) || sum;
+    var root = h("div");
+    var bar = h("div", { class: "bar", role: "img", "aria-label": "Time split across sections" });
+    var segs = blocks.map(function (b, i) {
+      var seg = h("div", { text: b.label, style: "flex:" + (Number(b.minutes) || 1) + ";background:var(--accent);opacity:" + (0.55 + 0.45 * ((i % 2)) ) });
+      bar.appendChild(seg); return seg;
+    });
+    root.appendChild(bar);
+    root.appendChild(h("p", null, [
+      h("span", { class: "pill " + (sum === total ? "good" : "warn"), text: sum + " of " + total + " minutes planned" }),
+      sum !== total ? " The blocks do not add up to the total. Adjust before you rehearse." : ""
+    ]));
+    var rows = blocks.map(function (b) {
+      return h("tr", null, [h("td", { text: String(b.minutes) + " min" }), h("td", { text: b.label }), h("td", { text: b.notes || "" })]);
+    });
+    root.appendChild(h("div", { class: "card", style: "overflow-x:auto" }, [h("table", null, [
+      h("thead", null, [h("tr", null, ["Time", "Section", "Notes"].map(function (t) { return h("th", { text: t }); }))]),
+      h("tbody", null, rows)
+    ])]));
+
+    var clock = h("div", { class: "clock", text: "00:00", "aria-live": "off" });
+    var where = h("p", { class: "muted", text: "Press start and talk through your material. The bar shows which section you should be in." });
+    var t = makeTimer(function (s) {
+      clock.textContent = mmss(s);
+      var acc = 0, idx = -1;
+      for (var i = 0; i < blocks.length; i++) { acc += (Number(blocks[i].minutes) || 0) * 60; if (s < acc) { idx = i; break; } }
+      segs.forEach(function (sg, i) { sg.className = i === idx ? "now" : ""; });
+      if (idx >= 0) where.textContent = "You should be in: " + blocks[idx].label;
+      else if (s > 0) where.textContent = "Over the planned " + total + " minutes.";
+    });
+    var start = h("button", { class: "btn primary", type: "button", text: "Start run-through", onclick: function () {
+      if (t.running()) { t.stop(); start.textContent = "Resume"; } else { t.start(); start.textContent = "Pause"; }
+    } });
+    var reset = h("button", { class: "btn", type: "button", text: "Reset", onclick: function () { t.reset(); start.textContent = "Start run-through"; where.textContent = "Press start and talk through your material."; } });
+    root.appendChild(h("div", { class: "card" }, [h("h2", { text: "Timed run-through" }), clock, where, h("div", { class: "row" }, [start, reset])]));
+    return root;
+  }
+
+  function viewCards(cards) {
+    var topics = ["All"];
+    cards.forEach(function (c) { if (c.topic && topics.indexOf(c.topic) < 0) topics.push(c.topic); });
+    var topic = "All", deck = [], pos = 0, flipped = false;
+    var root = h("div"), stage = h("div");
+    function build() {
+      deck = [];
+      cards.forEach(function (c, i) { if ((topic === "All" || c.topic === topic) && state.cards[i] !== "know") deck.push(i); });
+      if (pos >= deck.length) pos = 0;
+    }
+    function inTopic() { return cards.filter(function (c) { return topic === "All" || c.topic === topic; }).length; }
+    function draw() {
+      stage.textContent = "";
+      var known = inTopic() - deck.length;
+      stage.appendChild(h("p", { class: "muted", text: "Known " + known + " of " + inTopic() + (deck.length ? " | Card " + (pos + 1) + " of " + deck.length + " remaining" : "") }));
+      if (!deck.length) {
+        stage.appendChild(h("div", { class: "card" }, [h("h2", { text: "Deck complete" }), h("p", { text: "You marked every card in this set as known. Reset the deck to go again." })]));
+        return;
+      }
+      var c = cards[deck[pos]];
+      var card = h("div", { class: "card flash" }, [
+        c.topic ? h("div", { class: "eyebrow", text: c.topic }) : null,
+        h("div", { class: "q", text: c.q }),
+        flipped ? h("div", { class: "a" }, paras([c.a])) : null
+      ]);
+      stage.appendChild(card);
+      var row = h("div", { class: "row" });
+      row.appendChild(h("button", { class: "btn primary", type: "button", text: flipped ? "Hide answer" : "Show answer", onclick: function () { flipped = !flipped; draw(); } }));
+      if (flipped) {
+        row.appendChild(h("button", { class: "btn good", type: "button", text: "Got it", onclick: function () { state.cards[deck[pos]] = "know"; save(); flipped = false; build(); draw(); } }));
+        row.appendChild(h("button", { class: "btn bad", type: "button", text: "Again later", onclick: function () { flipped = false; pos = (pos + 1) % deck.length; draw(); } }));
+      }
+      stage.appendChild(row);
+    }
+    var sel = h("select", { "aria-label": "Filter by topic", onchange: function () { topic = sel.value; pos = 0; flipped = false; build(); draw(); } },
+      topics.map(function (t) { return h("option", { value: t, text: t }); }));
+    root.appendChild(h("div", { class: "row" }, [
+      sel,
+      h("button", { class: "btn", type: "button", text: "Shuffle", onclick: function () {
+        for (var i = deck.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var tmp = deck[i]; deck[i] = deck[j]; deck[j] = tmp; }
+        pos = 0; flipped = false; draw(); } }),
+      h("button", { class: "btn", type: "button", text: "Reset deck", onclick: function () { state.cards = {}; save(); pos = 0; flipped = false; build(); draw(); } })
+    ]));
+    root.appendChild(stage);
+    build(); draw();
+    return root;
+  }
+
+  function viewPractice(qs) {
+    var cur = 0;
+    var target = Number(DATA.answerSeconds) || 90;
+    var root = h("div", { class: "split" }), listBox = h("div", { class: "qlist" }), detail = h("div");
+    var RATINGS = [["needs", "Needs work", "bad"], ["getting", "Getting there", "warn"], ["solid", "Solid", "good"]];
+    function drawList() {
+      listBox.textContent = "";
+      qs.forEach(function (q, i) {
+        var r = state.rating[i];
+        var meta = [q.who ? h("span", { class: "eyebrow", text: q.who }) : null, r ? h("span", { class: "pill " + (r === "solid" ? "good" : r === "getting" ? "warn" : "bad"), text: r === "solid" ? "Solid" : r === "getting" ? "Getting there" : "Needs work", style: "margin-left:8px" }) : null];
+        listBox.appendChild(h("button", { type: "button", "aria-current": i === cur ? "true" : "false", onclick: function () { cur = i; drawList(); drawDetail(); } }, [h("div", null, meta), h("div", { text: q.q })]));
+      });
+    }
+    function drawDetail() {
+      clearTimers();
+      detail.textContent = "";
+      var q = qs[cur];
+      var clock = h("div", { class: "clock", text: "00:00" });
+      var limit = h("span", { class: "muted", text: "Target: " + mmss(target) });
+      var t = makeTimer(function (s) { clock.textContent = mmss(s); clock.style.color = s > target ? "var(--bad)" : "inherit"; });
+      var go = h("button", { class: "btn primary", type: "button", text: "Start timer", onclick: function () { if (t.running()) { t.stop(); go.textContent = "Resume timer"; } else { t.start(); go.textContent = "Pause timer"; } } });
+      var rs = h("button", { class: "btn", type: "button", text: "Reset", onclick: function () { t.reset(); go.textContent = "Start timer"; } });
+      var rate = h("div", { class: "row" }, RATINGS.map(function (r) {
+        return h("button", { class: "btn", type: "button", "aria-pressed": state.rating[cur] === r[0] ? "true" : "false", text: r[1], onclick: function () { state.rating[cur] = r[0]; save(); drawList(); drawDetail(); } });
+      }));
+      var notes = h("textarea", { "aria-label": "Your notes for this question", placeholder: "Your own notes and a tightened answer", oninput: function () { state.notes[cur] = notes.value; save(); } });
+      notes.value = state.notes[cur] || "";
+      detail.appendChild(h("div", { class: "card" }, [
+        q.who ? h("div", { class: "eyebrow", text: q.who }) : null,
+        h("h2", { text: q.q }),
+        h("div", { class: "row" }, [clock, limit, go, rs])
+      ]));
+      var blocks = [["What a strong answer includes", q.listen], ["Outline", q.outline], ["Watch out", q.watch]];
+      blocks.forEach(function (b) { if (b[1] && b[1].length) detail.appendChild(h("div", { class: "card" }, [h("h3", { text: b[0] }), list(b[1])])); });
+      detail.appendChild(h("div", { class: "card" }, [h("h3", { text: "How did it go?" }), rate, notes]));
+    }
+    root.appendChild(listBox); root.appendChild(detail);
+    drawList(); drawDetail();
+    return root;
+  }
+
+  function viewChecklist(cl) {
+    var root = h("div");
+    function section(title, key, items, withDetail) {
+      if (!items || !items.length) return;
+      var box = h("div", { class: "card" }, [h("h2", { text: title })]);
+      items.forEach(function (it, i) {
+        var id = key + ":" + i;
+        var label = typeof it === "string" ? it : it.title;
+        var detail = typeof it === "string" ? "" : it.detail;
+        var row = h("label", { class: "check" + (state.checks[id] ? " done" : "") });
+        var cb = h("input", { type: "checkbox", onchange: function () { state.checks[id] = cb.checked; save(); row.className = "check" + (cb.checked ? " done" : ""); } });
+        cb.checked = !!state.checks[id];
+        row.appendChild(cb);
+        row.appendChild(h("span", { class: "t" }, [h("strong", { text: label }), detail ? h("div", { class: "muted", text: detail }) : null]));
+        box.appendChild(row);
+      });
+      root.appendChild(box);
+    }
+    section("Fix list, in priority order", "fix", cl.fixes);
+    section("Questions to ask them", "ask", cl.ask);
+    section("Before the day", "pre", cl.before);
+    return root;
+  }
+
+  /* ---------- shell ---------- */
+  var VIEWS = {
+    overview: function () { return viewOverview(DATA.overview); },
+    concepts: function () { return viewConcepts(DATA.concepts); },
+    plan: function () { return viewPlan(DATA.plan); },
+    cards: function () { return viewCards(DATA.cards); },
+    practice: function () { return viewPractice(DATA.practice); },
+    checklist: function () { return viewChecklist(DATA.checklist); }
+  };
+  function has(k) {
+    var v = DATA[k];
+    if (k === "plan") return v && v.blocks && v.blocks.length;
+    if (k === "checklist") return v && ((v.fixes && v.fixes.length) || (v.ask && v.ask.length) || (v.before && v.before.length));
+    if (k === "overview") return !!v;
+    return v && v.length;
+  }
+
+  function init() {
+    load();
+    document.title = DATA.title || "Study Guide";
+    document.getElementById("title").textContent = DATA.title || "Study Guide";
+    document.getElementById("eyebrow").textContent = DATA.eyebrow || "";
+    document.getElementById("subtitle").textContent = DATA.subtitle || "";
+    var tabs = document.getElementById("tabs"), main = document.getElementById("main");
+    var avail = SECTION_ORDER.filter(function (s) { return has(s[0]); });
+    function show(id) {
+      clearTimers();
+      Array.prototype.forEach.call(tabs.children, function (b) { b.setAttribute("aria-selected", b.getAttribute("data-tab") === id ? "true" : "false"); });
+      main.textContent = "";
+      main.appendChild(VIEWS[id]());
+      try { history.replaceState(null, "", "#" + id); } catch (e) {}
+    }
+    avail.forEach(function (s) {
+      tabs.appendChild(h("button", { role: "tab", type: "button", "data-tab": s[0], "aria-selected": "false", text: s[1], onclick: function () { show(s[0]); } }));
+    });
+    document.getElementById("resetall").addEventListener("click", function () {
+      if (window.confirm("Clear flashcard progress, ratings, notes and checkmarks?")) {
+        state = { cards: {}, rating: {}, notes: {}, checks: {} }; save();
+        show((location.hash || "").slice(1) || avail[0][0]);
+      }
+    });
+    if (!avail.length) { main.textContent = "This guide has no content yet."; return; }
+    var first = (location.hash || "").slice(1);
+    show(avail.some(function (s) { return s[0] === first; }) ? first : avail[0][0]);
+  }
+  init();
+})();
+</script>
+</body>
+</html>
