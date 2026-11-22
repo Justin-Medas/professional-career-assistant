@@ -60,7 +60,7 @@ You get one file, `study-guide.html`, in that job's folder. Double-click to open
 - **Practice:** likely panel questions, a strong-answer checklist, an outline, a per-question timer, a self-rating, and a notes box
 - **Checklist:** what to fix first, questions to ask them, and a before-the-day list
 
-**Want to see one first?** [Try the live sample](https://justin-medas.github.io/professional-career-assistant/examples/sample-study-guide-frontend-platform.html) in your browser, or find the file at [examples/sample-study-guide-frontend-platform.html](examples/sample-study-guide-frontend-platform.html) and double-click it after downloading. It is a sample guide for a frontend platform engineering panel (fictional company, basic content) so you can try every tab before building your own. The same structure works for any field.
+**Want to see one first?** [Try the live sample](https://justin-medas.github.io/professional-career-assistant/examples/sample-study-guide-software-engineer.html) in your browser, or find the file at [examples/sample-study-guide-software-engineer.html](examples/sample-study-guide-software-engineer.html) and double-click it after downloading. It is a sample guide for a software engineer technical interview (fictional company, basic content) so you can try every tab before building your own. The same structure works for any field.
 
 After you practice or share new material, ask it to update the guide.
 

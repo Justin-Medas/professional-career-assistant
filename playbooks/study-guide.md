@@ -4,7 +4,7 @@ Builds an interactive study guide: one HTML file the user opens by double-click,
 
 The user may not be technical. Never ask them to run commands, edit JSON, or know file names. Say what you will make and what you need from them, in plain words.
 
-A finished example lives at `examples/sample-study-guide-frontend-platform.html` (engineering focus, fictional company). Open it to see the target quality and shape, and show it to a user who asks what a study guide looks like. Never copy its content into a real guide.
+A finished example lives at `examples/sample-study-guide-software-engineer.html` (engineering focus, fictional company). Open it to see the target quality and shape, and show it to a user who asks what a study guide looks like. Never copy its content into a real guide.
 
 ## When to offer
 

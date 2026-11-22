@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sample Study Guide: Frontend Platform Panel</title>
+<title>Sample Study Guide: Software Engineer Panel</title>
 <!--
   STUDY GUIDE TEMPLATE. Process: playbooks/study-guide.md
 
@@ -117,42 +117,42 @@ footer { margin-top: 30px; color: var(--muted); font-size: 0.85rem; }
 
 <script type="application/json" id="guide-data">
 {
-  "id": "sample-frontend-platform-panel",
-  "title": "SAMPLE: Frontend platform panel interview",
+  "id": "sample-software-engineer-panel",
+  "title": "SAMPLE: Software engineer technical panel",
   "eyebrow": "Sample guide with fictional details. Your guide is built from your own interview.",
-  "subtitle": "A 60-minute panel for a Director of Frontend Platform at a fictional company, Acme Cloud. Shows what a finished guide looks like for an engineering role.",
+  "subtitle": "A 60-minute panel for a mid to senior software engineer role at a fictional company, Acme Cloud. Shows what a finished guide looks like for an engineering interview.",
   "answerSeconds": 90,
   "overview": {
-    "summary": "A panel of three will test how you make technical decisions for a shared UI platform: architecture, design systems, and getting other teams to adopt what you build. They care less about the right answer than about the trade-offs you name and what you would do first.",
+    "summary": "A panel of three will test how you think through technical problems: how you design a system, reason about trade-offs, keep services reliable, and work with other people. They care less about the perfect answer than about whether you ask good questions, say your assumptions out loud, and explain your choices.",
     "points": [
       {
-        "h": "Decisions, not definitions",
-        "body": "Answer with a choice, the option you rejected, and the cost you accepted. Skip the textbook tour."
+        "h": "Clarify before you design",
+        "body": "Ask about users, scale, and what matters most before you draw anything. Panels score the process."
       },
       {
-        "h": "Adoption is the hard part",
-        "body": "A platform nobody uses has failed. Pair every technical answer with how teams would actually adopt it."
+        "h": "Name the trade-off",
+        "body": "For every choice, say what you gave up. 'It is faster but harder to keep consistent' beats 'it is better.'"
       },
       {
-        "h": "Be honest about edges",
-        "body": "Say what you have built, what you have only studied, and how you would learn the rest."
+        "h": "Use real examples",
+        "body": "Tie answers to something you built or fixed. Be honest about what you only studied."
       }
     ],
     "audience": [
       {
-        "who": "Staff Engineer",
-        "focus": "Architecture depth and trade-offs",
-        "tip": "Expect follow-ups on failure modes. Name one real risk early."
+        "who": "Senior Engineer",
+        "focus": "Technical depth and design reasoning",
+        "tip": "Expect follow-ups on failure modes. Name one risk early."
       },
       {
-        "who": "Engineering Director",
-        "focus": "Scope, org design, measurement",
-        "tip": "Tie decisions to team outcomes and how you would measure them."
+        "who": "Engineering Manager",
+        "focus": "Ownership, collaboration, communication",
+        "tip": "Use specific stories with a result and what you changed afterward."
       },
       {
-        "who": "Product Partner",
-        "focus": "Collaboration and delivery pace",
-        "tip": "Lead with what is in it for their team, then the mechanism."
+        "who": "Engineer from a partner team",
+        "focus": "How you work across teams",
+        "tip": "Show how you share context and handle disagreement."
       }
     ],
     "numbers": [
@@ -167,73 +167,77 @@ footer { margin-top: 30px; color: var(--muted); font-size: 0.85rem; }
         "note": "Headline, evidence, takeaway. Then stop."
       },
       {
-        "label": "LCP good threshold",
-        "value": "2.5 s",
-        "note": "Core Web Vitals, at the 75th percentile"
+        "label": "Hash lookup",
+        "value": "O(1) avg",
+        "note": "Worst case O(n) when many keys collide"
       },
       {
-        "label": "INP good threshold",
-        "value": "200 ms",
-        "note": "Interaction to Next Paint replaced FID in 2024"
+        "label": "Efficient sorting",
+        "value": "O(n log n)",
+        "note": "Merge sort and heap sort, for comparison sorts"
       }
     ]
   },
   "concepts": [
     {
-      "title": "Micro-frontends and module federation",
+      "title": "A repeatable approach to system design",
       "body": [
-        "A micro-frontend splits a large web app into pieces that separate teams build and ship independently. Module Federation (a Webpack 5 feature) lets one app, the host, load code from another, a remote, at runtime instead of at build time.",
-        "The hard part is shared dependencies. If two pieces each bring their own copy of a framework, pages get heavier and some frameworks break when two copies run together."
+        "Open-ended design questions have no single right answer. A steady process shows your thinking even when you do not know the specifics."
       ],
       "bullets": [
-        "Host: the shell that loads others. Remote: a piece that exposes modules.",
-        "Shared singleton: one copy of a framework used by everyone, which needs a version policy.",
-        "Native Federation and import maps are bundler-independent alternatives."
+        "Clarify requirements: what must it do, for how many users, how fast, how consistent?",
+        "Estimate load: requests per second, storage, read-to-write ratio.",
+        "Sketch the main path: client, API, service, data store, cache.",
+        "Go deep on the likely bottleneck and the failure modes.",
+        "Close with trade-offs and what you would build first."
       ]
     },
     {
-      "title": "Version skew",
+      "title": "APIs that are safe to call twice",
       "body": [
-        "Skew is when pieces built at different times expect different versions of something they share. It shows up as subtle runtime errors, not build failures."
+        "Networks fail, so clients retry. An operation is idempotent if doing it twice has the same effect as doing it once. GET, PUT, and DELETE are idempotent by definition. POST usually is not.",
+        "For operations like payments, the client sends a unique idempotency key so the server can recognize a retry and process it once."
       ],
       "bullets": [
-        "Strategy 1: the shell owns the framework runtime and publishes a support window (for example, current and previous major).",
-        "Strategy 2: isolate pieces as web components so each can bundle its own copy, at the cost of size.",
-        "Guardrails: contract tests between shell and remotes, canary releases, and a rollback path."
+        "Cursor pagination (a pointer to the last item) is steadier and faster than offset pagination on big, changing tables.",
+        "401 means not authenticated. 403 means authenticated but not allowed.",
+        "429 means too many requests. Clients should back off and honor Retry-After."
       ]
     },
     {
-      "title": "Design systems in layers",
+      "title": "Databases in plain terms",
       "body": [
-        "A design system is shared parts plus the rules for using them. Atomic design is a useful vocabulary: atoms (a button), molecules (a search field), organisms (a header), templates, pages.",
-        "Design tokens are named design decisions, such as color or spacing, stored as data. Tiering them (primitive, semantic, component) lets a theme change without touching components."
+        "An index is a data structure, often a B-tree, that makes lookups on a column fast. It speeds reads and costs extra storage and slower writes.",
+        "A transaction groups steps so they succeed or fail together. ACID stands for atomic, consistent, isolated, durable."
       ],
       "bullets": [
-        "Export tokens as CSS custom properties so any framework, including legacy, gets visual consistency.",
-        "Ship components as web components or per-framework wrappers for deeper reuse.",
-        "Govern with an intake process: how a team proposes, reviews, and contributes a component."
+        "N+1 queries: one query for a list, then one more per item. Fix by joining or batching.",
+        "Relational databases fit structured data with relationships and strict transactions.",
+        "Key-value and document stores fit simple access patterns and easy horizontal scaling, usually with fewer guarantees across records."
       ]
     },
     {
-      "title": "Migrating a legacy app without a rewrite",
+      "title": "Caching and its hard part",
       "body": [
-        "The strangler fig pattern replaces a legacy system piece by piece. A router sends some URLs to the new system and the rest to the old one, and the share shifts over time."
+        "A cache keeps a copy of data closer or faster to reach. In the cache-aside pattern the app checks the cache, and on a miss reads the database and fills the cache.",
+        "The hard part is knowing when the copy is stale."
       ],
       "bullets": [
-        "Pick a seam: a route, a page, or a widget.",
-        "Keep a single login session across old and new.",
-        "Measure each migrated slice (speed, errors) so the case for the next one makes itself."
+        "Use a time-to-live (TTL) for data that can be a little old.",
+        "Invalidate or update the cache when the data changes for data that cannot.",
+        "Watch for a stampede: many requests hitting the database at once when a popular entry expires."
       ]
     },
     {
-      "title": "Measuring a platform",
+      "title": "Reliability basics",
       "body": [
-        "Measure adoption, speed for the developer, and quality for the user. One metric from each keeps the picture honest."
+        "Assume dependencies will be slow or down. Protect your service and the one you call."
       ],
       "bullets": [
-        "Adoption: share of teams or screens on the platform.",
-        "Developer speed: time to first deploy for a new app, build and CI time.",
-        "User quality: Core Web Vitals (LCP, INP, CLS) and accessibility defects."
+        "Set timeouts on every outbound call.",
+        "Retry with exponential backoff and jitter, and only when the call is safe to repeat.",
+        "Use a circuit breaker so a failing dependency does not drag everything down.",
+        "Observe with logs, metrics, and traces so you can tell what broke."
       ]
     }
   ],
@@ -243,130 +247,145 @@ footer { margin-top: 30px; color: var(--muted); font-size: 0.85rem; }
       {
         "label": "Introductions",
         "minutes": 5,
-        "notes": "Your 60 to 90 second pitch. Mention one result and why this role."
+        "notes": "Your 60 to 90 second pitch. One result and why this role."
       },
       {
-        "label": "Architecture walkthrough",
-        "minutes": 20,
-        "notes": "One decision from your past work: options, choice, cost. Then skew and migration questions."
-      },
-      {
-        "label": "Design system deep dive",
+        "label": "Project deep dive",
         "minutes": 15,
-        "notes": "Layering, tokens, governance, and how legacy apps get access."
+        "notes": "One project: your role, the hardest problem, the trade-off you made, the result."
       },
       {
-        "label": "Leadership scenario",
+        "label": "System design",
+        "minutes": 20,
+        "notes": "Clarify first. Think out loud. Cover failure modes and trade-offs."
+      },
+      {
+        "label": "Collaboration and quality",
         "minutes": 10,
-        "notes": "Convincing a reluctant team. Empathy first, then a small first step."
+        "notes": "An incident or disagreement story. Testing and review habits."
       },
       {
         "label": "Your questions",
         "minutes": 10,
-        "notes": "Ask 3 to 5. At least two tied to research about their platform."
+        "notes": "Ask 3 to 5. At least two tied to research about their team."
       }
     ]
   },
   "cards": [
     {
-      "topic": "Architecture",
-      "q": "What does a micro-frontend solve?",
-      "a": "It lets separate teams build, test, and release parts of one large web app independently, at the cost of coordination around shared dependencies and consistency."
+      "topic": "System design",
+      "q": "What is the first step in a system design question?",
+      "a": "Clarify requirements and scale: users, read and write volume, latency, and consistency needs. Do this before drawing anything."
     },
     {
-      "topic": "Architecture",
-      "q": "Host versus remote in Module Federation?",
-      "a": "The host is the app that loads code at runtime. A remote is an app that exposes modules for hosts to load."
+      "topic": "System design",
+      "q": "Why estimate load roughly?",
+      "a": "Rough requests per second, storage, and bandwidth show which parts will be bottlenecks and keep the design proportionate."
     },
     {
-      "topic": "Architecture",
-      "q": "What is a shared singleton?",
-      "a": "One copy of a library, usually a UI framework, shared by every piece on the page. It avoids duplicate downloads and conflicts but requires a version policy."
+      "topic": "System design",
+      "q": "Vertical versus horizontal scaling?",
+      "a": "Vertical means a bigger machine: simple, but it has a ceiling. Horizontal means more machines: more headroom, but it needs stateless services or partitioned data."
     },
     {
-      "topic": "Architecture",
-      "q": "What is version skew?",
-      "a": "Pieces built at different times expect different versions of something they share, which causes runtime errors that build checks do not catch."
+      "topic": "System design",
+      "q": "What does a load balancer do?",
+      "a": "It spreads requests across servers and uses health checks to stop sending traffic to unhealthy ones."
     },
     {
-      "topic": "Architecture",
-      "q": "Name two ways to manage skew.",
-      "a": "A shell-owned framework runtime with a published support window, and isolation through web components that bundle their own copy. Add contract tests and canaries as guardrails."
+      "topic": "System design",
+      "q": "The CAP trade-off in plain words?",
+      "a": "When a network partition happens, a distributed system has to choose between staying consistent and staying available."
     },
     {
-      "topic": "Architecture",
-      "q": "What is the strangler fig pattern?",
-      "a": "Replace a legacy system gradually by routing some traffic to new code while the rest stays on old code, until the old system can be retired."
+      "topic": "APIs",
+      "q": "Which HTTP methods are idempotent?",
+      "a": "GET, PUT, and DELETE (also HEAD and OPTIONS). POST usually is not. Idempotent means repeating the call has the same effect as making it once."
     },
     {
-      "topic": "Architecture",
-      "q": "What is a Backend for Frontend (BFF)?",
-      "a": "A server layer shaped for one UI's needs. It aggregates and adapts several backend services so the front end stays simple."
+      "topic": "APIs",
+      "q": "Why use idempotency keys?",
+      "a": "The client sends a unique key with a request so a retried POST, such as a payment, is recognized and processed once."
     },
     {
-      "topic": "Design system",
-      "q": "What is a design token?",
-      "a": "A named design decision stored as data, such as a color or spacing value, so it can be reused and changed in one place."
+      "topic": "APIs",
+      "q": "Cursor versus offset pagination?",
+      "a": "Offset is simple but gets slow on big tables and can skip or repeat items when data changes. A cursor points at the last item seen, so it is steadier and faster."
     },
     {
-      "topic": "Design system",
-      "q": "Why tier tokens?",
-      "a": "Primitive tokens hold raw values, semantic tokens give them meaning (such as text-primary), and component tokens bind them to parts. Themes change at the semantic tier."
+      "topic": "APIs",
+      "q": "401 versus 403?",
+      "a": "401 means the caller is not authenticated. 403 means they are authenticated but not allowed to do this."
     },
     {
-      "topic": "Design system",
-      "q": "Atomic design in one line.",
-      "a": "Build interfaces from atoms, molecules, organisms, templates, and pages, so shared parts compose from smaller ones."
+      "topic": "APIs",
+      "q": "What does a 429 response mean?",
+      "a": "Too many requests. The server is rate limiting, and the client should back off, often waiting as long as the Retry-After header says."
     },
     {
-      "topic": "Design system",
-      "q": "How can a legacy app get design system value cheaply?",
-      "a": "Ship tokens as CSS custom properties. Any framework can use them, so visual consistency does not need a rewrite."
+      "topic": "Data",
+      "q": "What does a database index do?",
+      "a": "It speeds up lookups on a column, usually with a B-tree, at the cost of extra storage and slower writes."
     },
     {
-      "topic": "Design system",
-      "q": "What does design system governance mean?",
-      "a": "The process for proposing, reviewing, versioning, and contributing components, plus who decides and how teams are supported."
+      "topic": "Data",
+      "q": "What is the N+1 query problem?",
+      "a": "Loading a list with one query and then running one more query per item. Fix it by joining or batching the lookups."
+    },
+    {
+      "topic": "Data",
+      "q": "ACID in one line each?",
+      "a": "Atomic: all or nothing. Consistent: rules stay true. Isolated: concurrent transactions do not interfere beyond the chosen level. Durable: committed data survives a crash."
+    },
+    {
+      "topic": "Data",
+      "q": "When might you choose a NoSQL store?",
+      "a": "When the access pattern is simple key or document lookups, the schema changes often, or you need to scale writes horizontally. You usually give up joins and some transaction guarantees."
+    },
+    {
+      "topic": "Caching",
+      "q": "What is the cache-aside pattern?",
+      "a": "The app checks the cache first. On a miss it reads the database and stores the result in the cache. It is simple, but data can go stale."
+    },
+    {
+      "topic": "Caching",
+      "q": "What is the hard part of caching?",
+      "a": "Invalidation, knowing when the cached copy is stale. Use TTLs for tolerant data and explicit invalidation on writes for data that must be fresh."
+    },
+    {
+      "topic": "Reliability",
+      "q": "Why add jitter to retries?",
+      "a": "Exponential backoff spaces retries out. Random jitter stops many clients from retrying in lockstep and swamping a service that is recovering."
+    },
+    {
+      "topic": "Reliability",
+      "q": "What is a circuit breaker?",
+      "a": "A guard that stops calling a failing dependency for a while so failures do not cascade and the dependency can recover."
+    },
+    {
+      "topic": "Reliability",
+      "q": "What are the three pillars of observability?",
+      "a": "Logs, metrics, and traces."
     },
     {
       "topic": "Quality",
-      "q": "Core Web Vitals: what are the three?",
-      "a": "Largest Contentful Paint (loading), Interaction to Next Paint (responsiveness), Cumulative Layout Shift (visual stability)."
+      "q": "What is the test pyramid?",
+      "a": "Many fast unit tests, fewer integration tests, and the fewest slow end-to-end tests."
     },
     {
       "topic": "Quality",
-      "q": "Good thresholds for LCP, INP, CLS?",
-      "a": "LCP 2.5 seconds or less, INP 200 milliseconds or less, CLS 0.1 or less, measured at the 75th percentile of real users."
-    },
-    {
-      "topic": "Quality",
-      "q": "What is the normal-text contrast minimum in WCAG AA?",
-      "a": "4.5 to 1 for normal text. Large text needs 3 to 1."
-    },
-    {
-      "topic": "Delivery",
-      "q": "What does semantic versioning communicate?",
-      "a": "Major.minor.patch. A major bump signals breaking changes, minor adds features compatibly, patch fixes bugs."
-    },
-    {
-      "topic": "Delivery",
-      "q": "What is contract testing?",
-      "a": "Checking that a consumer and a provider agree on an interface, so each can change safely without full end-to-end runs."
-    },
-    {
-      "topic": "Delivery",
-      "q": "Canary release versus feature flag?",
-      "a": "A canary exposes a new version to a small share of traffic. A flag turns behavior on or off at runtime. Both limit blast radius and enable fast rollback."
-    },
-    {
-      "topic": "Leadership",
-      "q": "A team says they have no time to adopt your platform. First move?",
-      "a": "Acknowledge the deadline, ask what it would take, and offer the smallest useful first step, such as tokens only, with support."
+      "q": "What makes a good code review?",
+      "a": "Small changes with a clear description, feedback on correctness, clarity, and risk, kind and specific comments, and automation for style."
     },
     {
       "topic": "Delivery",
       "q": "Best shape for a spoken answer?",
       "a": "Headline first, one example with evidence, one takeaway, then stop. About 90 seconds."
+    },
+    {
+      "topic": "Trap",
+      "q": "Trap: jumping straight to a solution.",
+      "a": "Ask clarifying questions first. Panels score how you frame the problem as much as the design."
     },
     {
       "topic": "Trap",
@@ -376,130 +395,128 @@ footer { margin-top: 30px; color: var(--muted); font-size: 0.85rem; }
   ],
   "practice": [
     {
-      "who": "Staff Engineer",
-      "q": "Pick one significant technical decision from your platform work. What options did you consider, what did you choose, and what did it cost?",
+      "who": "Engineering Manager",
+      "q": "Walk me through a project you are proud of. What was your role, what was the hardest technical problem, and what was the result?",
       "listen": [
-        "A real trade-off, not a feature list",
-        "A named rejected option and why",
-        "A cost you accepted",
-        "Which part was your decision and which was the team's"
+        "Clear ownership: what you did versus the team",
+        "A real problem and a trade-off",
+        "A result, with a number if you have one",
+        "What you would do differently"
       ],
       "outline": [
-        "Headline: the decision in one sentence.",
-        "Rejected option and the reason.",
-        "Mechanism in one sentence.",
-        "Cost you accepted and how you contained it.",
-        "What you would revisit."
+        "Headline: what it was and why it mattered.",
+        "Your role in one sentence.",
+        "The hardest problem and the options you weighed.",
+        "What you chose and what it cost.",
+        "The result and one lesson."
       ],
       "watch": [
-        "One decision, not four.",
-        "Do not describe other teams as behind. Say they had different constraints."
+        "Do not say 'we' for everything. Be clear about your part.",
+        "Do not invent numbers. Describe what changed in plain terms if you lack one."
       ]
     },
     {
-      "who": "Staff Engineer",
-      "q": "Federated modules can hit framework version skew. What breaks, and how do you let teams upgrade independently?",
+      "who": "Senior Engineer",
+      "q": "Design a URL shortener. Walk me through it.",
       "listen": [
-        "Concrete failure modes",
-        "More than one strategy with its cost",
-        "A choice for this situation",
-        "Honest limits"
+        "Clarifying questions first",
+        "A simple API",
+        "A way to generate unique short codes",
+        "Read-heavy thinking and caching",
+        "Failure modes and trade-offs"
       ],
       "outline": [
-        "Headline: the risk is the shared runtime, so decide what is shared and what is isolated.",
-        "Two failure modes.",
-        "Shell-owned runtime with a support window versus isolation, with costs.",
-        "Guardrails: contract tests, canary, rollback."
+        "Clarify: scale, custom aliases, expiry, analytics.",
+        "API: create a short link, redirect to the original.",
+        "Codes: encode a unique ID in base 62, or hash and handle collisions.",
+        "Store key to URL in a key-value store. Cache hot links.",
+        "Scale and failure: replicas, rate limiting, what happens if the store is down."
       ],
       "watch": [
-        "Do not say static output removes the problem.",
-        "Use evidence from your own work if you have it, and label it as yours."
+        "Do not start drawing before asking questions.",
+        "Name one trade-off, such as 301 versus 302 redirects and what each does to analytics."
       ]
     },
     {
-      "who": "Engineering Director",
-      "q": "You are setting up a design system for about 100 apps, many of them legacy. How do you approach it?",
+      "who": "Senior Engineer",
+      "q": "A call to a payment service sometimes times out. How do you make retries safe?",
       "listen": [
-        "Layering",
-        "A packaging choice with a rejected alternative",
-        "A governance mechanism",
-        "A legacy path",
-        "A first 90 days with a pilot"
+        "Idempotency keys",
+        "Timeouts and backoff with jitter",
+        "Recording state so you can reconcile",
+        "Awareness that a timeout does not mean failure"
       ],
       "outline": [
-        "Headline: buy the basics, own what is distinctive, govern through intake.",
-        "Tokens as CSS variables for legacy reach.",
-        "Components through web components or wrappers.",
-        "Pilot with one team on a real screen, then a beta."
+        "Headline: a timeout is unknown, not failed, so make the call safe to repeat.",
+        "Send an idempotency key with each attempt.",
+        "Set a timeout and retry with backoff and jitter.",
+        "Record the attempt and reconcile later by checking the provider."
       ],
       "watch": [
-        "Ask what exists today before assuming greenfield.",
-        "Do not promise a full rewrite."
+        "Do not say 'just retry.' That can charge a customer twice."
       ]
     },
     {
-      "who": "Engineering Director",
-      "q": "How would you know whether the platform is working a year from now?",
+      "who": "Senior Engineer",
+      "q": "A page that lists orders was fast and is now slow as the data grew. How do you investigate?",
       "listen": [
-        "Adoption, developer speed, and user quality",
-        "Baselines before targets",
-        "A leading indicator",
-        "Willingness to retire what does not work"
+        "Measure before guessing",
+        "Database-level diagnosis",
+        "A fix matched to the cause",
+        "Verification afterward"
       ],
       "outline": [
-        "Headline: one metric each for adoption, developer speed, and user quality.",
-        "Take a baseline in the first month.",
-        "Share the numbers openly with teams.",
-        "Name one metric you would not use and why."
+        "Headline: measure first, then fix the biggest cause.",
+        "Use traces and the slow query log to find where time goes.",
+        "Check the query plan for a missing index, and look for N+1 queries.",
+        "Consider pagination and caching if the result set is large.",
+        "Confirm the improvement with the same measurement."
       ],
       "watch": [
-        "Do not quote numbers you have not measured.",
-        "Avoid vanity metrics such as component count."
+        "Do not propose caching as the first move without knowing the cause."
       ]
     },
     {
-      "who": "Product Partner",
-      "q": "My team is on a legacy stack with deadlines and no spare capacity. Convince me. What is in it for my team?",
+      "who": "Engineering Manager",
+      "q": "Tell me about a production incident you were part of. What happened and what changed afterward?",
       "listen": [
-        "Empathy first",
-        "Value for their team, not for the platform",
-        "An incremental path",
-        "How friction is handled",
-        "A measurable outcome"
+        "Calm, factual timeline",
+        "Your specific actions",
+        "Root cause without blame",
+        "A lasting fix, not just a patch"
       ],
       "outline": [
-        "Acknowledge the deadline.",
-        "One line of value with a real example.",
-        "Smallest first step with support.",
-        "How you will measure it together."
+        "Situation in two sentences.",
+        "How it was detected and what you did first.",
+        "Root cause.",
+        "The fix, and what you changed so it would not repeat, such as a test, alert, or process."
       ],
       "watch": [
-        "Answer what is in it for them before asking questions.",
-        "Do not imply their team is behind."
+        "Do not blame a person or another team.",
+        "Choose a real incident. Panels follow up."
       ]
     },
     {
-      "who": "Staff Engineer",
-      "q": "How would you migrate a large legacy front end without a rewrite?",
+      "who": "Engineer from a partner team",
+      "q": "Tell me about a time you disagreed with a teammate on a technical approach. How did it resolve?",
       "listen": [
-        "Strangler pattern or equivalent",
-        "A seam to start at",
-        "Session and auth continuity",
-        "Measurement of each slice"
+        "Respect for the other view",
+        "Evidence over opinion",
+        "Willingness to commit either way",
+        "What you learned"
       ],
       "outline": [
-        "Headline: route traffic gradually, not all at once.",
-        "Start at a low-risk seam.",
-        "Keep one session across old and new.",
-        "Measure speed and errors per slice."
+        "The decision and the two positions.",
+        "How you gathered evidence, such as a prototype or data.",
+        "How the decision was made.",
+        "How you supported it afterward, even if it was not your preference."
       ],
       "watch": [
-        "Name a rollback plan.",
-        "Avoid saying it will be quick."
+        "Avoid a story where you were simply right and they were simply wrong."
       ]
     },
     {
-      "who": "Engineering Director",
+      "who": "Engineering Manager",
       "q": "Tell me about something you built where you were less sure than you sounded. What did you do about it?",
       "listen": [
         "Honesty about uncertainty",
@@ -520,12 +537,16 @@ footer { margin-top: 30px; color: var(--muted); font-size: 0.85rem; }
   "checklist": {
     "fixes": [
       {
-        "title": "Write your one decision story",
-        "detail": "Use the Practice tab outline. Practice it out loud with the timer until it fits in 90 seconds."
+        "title": "Write your project story",
+        "detail": "Use the first Practice outline. Say it out loud with the timer until it fits in 90 seconds."
       },
       {
-        "title": "Settle your skew answer",
-        "detail": "Pick one primary strategy and know its cost."
+        "title": "Practice one design end to end",
+        "detail": "Try the URL shortener, then a design from your own work. Always start with questions."
+      },
+      {
+        "title": "Prepare an incident story",
+        "detail": "Pick one real incident with a clear root cause and a lasting fix."
       },
       {
         "title": "Prepare your honest gap answer",
@@ -533,19 +554,19 @@ footer { margin-top: 30px; color: var(--muted); font-size: 0.85rem; }
       },
       {
         "title": "Confirm the panel format",
-        "detail": "Ask the recruiter for names, titles, and the stated focus areas."
+        "detail": "Ask the recruiter for names, titles, and whether there is live coding or a whiteboard."
       }
     ],
     "ask": [
-      "What does success look like for this role at six and twelve months?",
-      "Which teams use the platform today, and which resist it most?",
-      "How are decisions about shared components made right now?",
-      "What is the biggest technical constraint you want removed?",
-      "What would you change about how the platform team works with product teams?"
+      "What does a typical week look like for this team?",
+      "How does the team handle on-call and incidents?",
+      "How are technical decisions made and written down?",
+      "What is the biggest piece of technical debt the team wants to pay down?",
+      "What does success look like in this role at six and twelve months?"
     ],
     "before": [
       "Test audio, video, and screen sharing the day before.",
-      "Open your pitch, your decision story, and this guide.",
+      "Open your pitch, your project story, and this guide.",
       "Rehearse the full 60 minutes once with the Plan timer.",
       "Have a glass of water and a notepad ready."
     ]
