@@ -40,7 +40,7 @@ Fill `jobs/<company>-<role>/interview-prep.md`:
 9. **Logistics checklist.** See "Logistics" below.
 10. **Compensation position.** The user's floor and target from `positioning.md`, researched market range for the role, and the planned answer (see recruiter screen guidance).
 
-Offer a mock interview in chat after the file is drafted (see "Mock interviews").
+Offer a mock interview in chat after the file is drafted (see "Mock interviews"). For a panel, technical, case, presentation, or executive stage, also offer an interactive study guide (`playbooks/study-guide.md`) and say what it contains in one sentence.
 
 ## Stage guide
 
@@ -63,7 +63,15 @@ Offer a mock interview in chat after the file is drafted (see "Mock interviews")
 - **Design or research:** portfolio walk-through (problem, role, process, outcome), critique, whiteboard or take-home.
 - **Sales or solutions:** discovery role-play, demo, deal review.
 - **Operations, finance, analytics, other:** case or scenario, tool proficiency, process improvement example.
-- **Prep:** ask the recruiter exactly what is covered; build practice material for it; do a timed run.
+- **Prep:** ask the recruiter exactly what is covered; build practice material for it (an interactive study guide works well, see `playbooks/study-guide.md`); do a timed run.
+
+### Case study or presentation round (often 60 to 90 minutes)
+- **Purpose:** show how the user structures an ambiguous problem, uses evidence, communicates to a mixed audience, and handles pushback live. Usually a take-home or prepared case, presented to a panel, followed by questions.
+- **Ask the recruiter early:** the exact prompt or brief, the time split between presenting and questions, who attends, the evaluation criteria, allowed tools or slides format, whether the deck is sent in advance, and whether outside research is expected.
+- **Prep:** state the recommendation in the first two minutes; spend the rest proving it; name the options rejected and why; know every number's source and assumption; plan time per section so questions get real room; rehearse out loud with a timer at least twice; prepare for the three hardest questions plus one on the user's weakest assumption.
+- **Study guide:** offer to build one (`playbooks/study-guide.md`). It includes a time plan with a run-through timer, flashcards for facts and numbers, and a practice mode for panel questions.
+- **Ask them:** what a strong outcome looks like, which assumptions they most want challenged, how the team would act on the recommendation.
+- **After:** debrief, and thank each panelist separately.
 
 ### Panel or onsite loop
 - **Purpose:** multiple perspectives on the same candidate. Often includes cross-functional partners, peers, and a values or culture round.

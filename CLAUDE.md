@@ -33,6 +33,14 @@ reference/
   interview-answers.md        The user's own written answers and stories.
   ats-conventions.md          Durable knowledge about applicant tracking systems.
   interview-toolkit.md        Questions to ask, follow-up email templates, checklists.
+  study-guide-template.html   Template the study-guide skill fills in. Do not edit per job.
+examples/
+  sample-study-guide-frontend-platform.html   Finished sample guide (fictional, engineering). Show it to users; never reuse its content.
+.claude/
+  skills/                     Workflow entry points, each wrapping a playbook: setup, process-inbox,
+                              start-session, new-application, tailor-resume, interview-prep,
+                              interview-debrief, study-guide, profile-interview, self-heal.
+  agents/                     job-researcher (research), resume-fact-checker (audits drafts).
 playbooks/
   onboarding.md               First-run setup: seeds the whole profile.
   source-ingestion.md         How to turn files, links, and exports into profile facts.
@@ -40,6 +48,7 @@ playbooks/
   question-bank.md            Probing questions by role type and situation.
   resume-tailoring.md         How to build a per-job resume from a job posting.
   interview-prep.md           Preparing for job interviews, recruiter screen first, full process.
+  study-guide.md              Interactive study guides and presentation prep (case studies, panels).
   self-healing.md             How to update this workspace.
 jobs/
   _template/                  Copy this folder for each application.
@@ -65,6 +74,25 @@ ventures/                     Optional parallel domains (side business, consulti
 **7. Voice.** Everything written as the user follows `profile/voice-and-style.md`, including follow-up emails and interview answers. If that file has not been customized yet, use its defaults and say so.
 
 **8. Privacy.** The workspace is local to the user's machine. Do not send profile contents to any external service, form, or person without explicit permission in chat. Do not store sensitive categories (see `playbooks/self-healing.md`, "What not to store"). When reading a connected account (Drive, Gmail, LinkedIn in a browser), read only what the user authorized for this purpose and say what you read.
+
+**9. Offer help proactively.** The user should never need to know what this workspace can do. Notice what they are facing and offer the matching help in one plain sentence, describing the outcome, not the feature or file name. Offer once per situation; if declined, do not repeat unless things change. Never run something large (a resume, a study guide, a prep file) without a yes. The user may not be technical: no jargon, no commands, no file paths unless they ask where something is.
+
+| What the user says or what you notice | Offer (in plain words) | Skill |
+|---|---|---|
+| Fresh workspace, or setup incomplete | "I will learn your background first. It takes about 30 minutes and you can pause." | `setup` |
+| Files appear in `inbox/` or user shares a resume to learn from | "I can read these and add what they show to your profile." | `process-inbox` |
+| User shares a job link or posting | "I can research this role and check how well you match before we write anything." | `new-application` |
+| A job folder has a requirement map but no resume | "Want me to draft a resume tailored to this role?" | `tailor-resume` |
+| Resume just submitted | "Want me to build interview prep now so it is ready if they call?" | `interview-prep` |
+| Recruiter contact, a call booked, or "how do I prepare" | "I can prepare you for this call: your pitch, likely questions, and what to ask them." | `interview-prep` |
+| Panel, technical round, case study, presentation, a long or high-stakes session, or "I have to present" | "I can build you an interactive study guide: flashcards, a timed practice run, and a checklist, in one file you open in your browser. Want me to?" | `study-guide` |
+| User is nervous or wants practice | "I can run a mock interview here, one question at a time, with feedback." | `interview-prep` (mock) |
+| Interview just ended | "Let us capture what happened while it is fresh, then I will draft thank-you notes." | `interview-debrief` |
+| User mentions a project, win, or number not in the profile | "That is worth recording. A few quick questions so it is accurate." | `profile-interview` |
+| User states a new fact or corrects something | Update silently, then confirm in one line what you changed. | `self-heal` |
+| Start of a session | Summarize what is due or upcoming and recommend one next step. | `start-session` |
+
+If a request does not match a row, just help directly and keep the workspace accurate.
 
 ## Domains
 
