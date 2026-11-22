@@ -1,6 +1,8 @@
 # Professional Assistant
 
-A personal career assistant that runs in [Claude Code](https://claude.com/claude-code). It learns who you are from your resumes, LinkedIn data, and a guided conversation, then helps you with the work around a job search: tailored resumes, interview preparation, study guides for high-stakes presentations, and follow-ups. Everything is plain files on your own computer.
+**New here? Start with the [simple guide](https://justin-medas.github.io/professional-career-assistant/).**
+
+A personal career assistant that runs in [Claude](https://claude.com/claude-code) (best tested) or ChatGPT's Codex on your own computer. It learns who you are from your resumes, LinkedIn data, and a guided conversation, then helps you with the work around a job search: tailored resumes, interview preparation, study guides for high-stakes presentations, and follow-ups. Everything is plain files on your own computer.
 
 You do not need to be technical, and you do not need to learn any commands. Talk to it the way you would talk to a capable colleague. It notices what you are facing and offers the right help.
 
@@ -14,11 +16,12 @@ You do not need to be technical, and you do not need to learn any commands. Talk
 
 ## Quickstart
 
-1. Put this folder somewhere **private** on your computer (not a public repository). One copy per person.
-2. **Before your first session, drop material into `inbox/`.** The more you add, the fewer questions you will be asked. [inbox/README.md](inbox/README.md) lists what helps most, including how to export your LinkedIn data.
-3. Open the folder in Claude Code and say hello, or say "start setup."
-4. Setup takes about 30 to 45 minutes and can be paused. It tracks its own progress.
-5. When it finishes, paste a job posting or a link and say what you want.
+1. **Download.** At the top of this page, click the green **Code** button, then **Download ZIP**. (Or use the [direct download link](https://github.com/Justin-Medas/professional-career-assistant/archive/refs/heads/main.zip).)
+2. **Unzip it** by double-clicking the file (on Windows, right-click and choose Extract All). Move the folder somewhere private, like Documents. One copy per person, and never upload a filled-in copy to a public site.
+3. **Add your resumes (best, not required).** Drop resumes and a LinkedIn export into the `inbox` folder. The more it can read, the fewer questions it asks. [inbox/README.md](inbox/README.md) lists what helps most.
+4. **Open the folder in your AI app.** In the Claude desktop app, switch to the **Code** tab and choose the folder. In ChatGPT, open Codex (its coding mode) and choose the folder. Claude is the best tested; ChatGPT support relies on `AGENTS.md`, which points it at the same instructions.
+5. **Say hello.** Type "Hi, help me get started." Setup takes about 30 to 45 minutes and can be paused.
+6. **When it finishes,** paste a job posting or a link and say what you want.
 
 ## You do not need to memorize anything
 
@@ -78,7 +81,8 @@ If your Claude setup has Google Drive, Gmail, or a browser extension connected, 
 
 ## For the curious: how it is built
 
-- `CLAUDE.md` holds the assistant's operating instructions, including when to offer help.
+- `CLAUDE.md` holds the assistant's operating instructions, including when to offer help. `AGENTS.md` points other tools, such as ChatGPT's Codex, at the same instructions and skills.
+- `index.html` is the simple start page published on GitHub Pages.
 - `playbooks/` hold the step-by-step methods (resumes, interviews, study guides, setup).
 - `.claude/skills/` and `.claude/agents/` are shortcuts into those playbooks. The assistant picks them for you; you can also type a skill name such as `/study-guide`.
 - `reference/study-guide-template.html` is the template every study guide is filled into.
