@@ -2,6 +2,8 @@
 
 Every resume targets one job req. There is no generic resume; `profile/career-history.md` is the master record that tailored resumes draw from.
 
+Apply `profile/overrides.md` (Resume tailoring section) on top of everything below if it exists.
+
 ## Process
 
 1. **Ingest the posting.** Create `jobs/<company>-<role-slug>/` from `jobs/_template/`. Save the full job req to `posting.md` with the URL and date. If given only a link, fetch it. If the fetch fails or is partial, ask the user to paste the text.
@@ -35,6 +37,6 @@ Same grounding rules apply. Draft in the user's voice, lead with the single stro
 
 ## Role-family notes (grows over time)
 
-Start empty. As tailoring happens for a role family, record what works in this section: which parts of the profile to lead with, keywords that recur, and any user feedback. Format:
+Record these in `profile/overrides.md` under "Role-family notes", not in this shared file. As tailoring happens for a role family, record what works there: which parts of the profile to lead with, keywords that recur, and any user feedback. Format:
 
 - **<Role family>:** <what to lead with; what to downplay; recurring requirements>. (<date>)

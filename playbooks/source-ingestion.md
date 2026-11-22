@@ -78,5 +78,5 @@ If a file contains government IDs, bank details, medical information, or other c
 ## After ingestion
 
 - Update `profile/setup-status.md` counts (sources processed, roles found).
-- Append a CHANGELOG line: date, sources ingested (count and types), net new facts, conflicts logged.
+- Append a changelog line: date, sources ingested (count and types), net new facts, conflicts logged.
 - Queue follow-up questions in `profile/open-questions.md` for anything thin: roles with no metrics, vague scope, undated entries.

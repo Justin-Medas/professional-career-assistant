@@ -73,7 +73,7 @@ After you practice or share new material, ask it to update the guide.
 
 ## How it stays accurate
 
-The assistant never invents facts. Anything it is unsure about becomes a question in `profile/open-questions.md`. Corrections you make are written back into your profile. Every change is logged in `CHANGELOG.md`. It never sends an email or message without your explicit yes.
+The assistant never invents facts. Anything it is unsure about becomes a question in `profile/open-questions.md`. Corrections you make are written back into your profile. Every change is logged in `profile/changelog.md`. It never sends an email or message without your explicit yes.
 
 ## Optional connectors
 
@@ -87,6 +87,12 @@ If your Claude setup has Google Drive, Gmail, or a browser extension connected, 
 - `.claude/skills/` and `.claude/agents/` are shortcuts into those playbooks. The assistant picks them for you; you can also type a skill name such as `/study-guide`.
 - `reference/study-guide-template.html` is the template every study guide is filled into.
 - Change a process by editing the playbook. The skills point to it.
+- `templates/` holds blank starter files. Setup copies them into `profile/` and `reference/`, which are git-ignored, so your personal data can never be committed with the shared code. A guard in `scripts/` and `.github/` blocks it even if someone tries.
+- `profile/overrides.md` is where your own preferences and tweaks go. It is yours alone.
+
+## Contributing: bring your field
+
+This began with software and product careers, but the method works anywhere. If you work in customer experience, corporate events, project management, sales, healthcare, education, or another field, you can add what you know: what hiring managers expect, typical interview stages, keywords, assessments, pay norms. No coding needed. See [CONTRIBUTING.md](CONTRIBUTING.md) for what to add, where it goes, and how to submit it. Your personal files stay out of anything you share.
 
 ## Adding other domains
 
@@ -94,7 +100,12 @@ A side business, consulting practice, or anything else you want help with: tell 
 
 ## Keep your copy private
 
-Once you run setup, this workspace holds your real career history, contact details, and job applications. Do not push a populated copy to a public repository. The `.gitignore` excludes `inbox/` and `reference/resumes/originals/`, but `profile/`, `jobs/`, and `reference/` will contain personal data after setup. If you want version control for your own copy, use a private repository.
+Once you run setup, this workspace holds your real career history, contact details, and job applications. These live only in folders that git ignores: `profile/`, `jobs/`, `inbox/`, `ventures/`, `reference/resumes/`, and `reference/interview-answers.md`. "Ignored" means git will not track or upload them, so you can commit or share improvements to the shared files without your personal data going along. A check (`scripts/check-personal-data.sh`, run by a commit hook and on GitHub) blocks any commit that includes those paths.
+
+Two limits to know:
+
+- Git-ignored also means git does not back them up. Keep your own backup, such as Time Machine or a private repository for just those folders.
+- Do not zip up or copy the whole folder to a public place, since the personal files are still on your disk.
 
 ## License
 

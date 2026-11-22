@@ -4,6 +4,8 @@ Note: `playbooks/interviewing.md` is about the assistant asking the user questio
 
 Assume the first conversation is a **recruiter screen**, but treat it as step one of a longer process. Prep for the stage in front of the user, and surface what is coming next so nothing arrives unprepared.
 
+Apply `profile/overrides.md` (Interview prep section) on top of everything below if it exists. It holds the user's own narratives, defaults, and honest gaps.
+
 ## When this playbook runs
 
 - The user mentions a recruiter reached out, a call is scheduled, or an interview is booked.

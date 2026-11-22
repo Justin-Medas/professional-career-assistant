@@ -13,7 +13,9 @@ Track progress in `profile/setup-status.md`: set `state: in-progress`, tick each
 - **Provenance always.** Each fact entered into `career-history.md` carries a source tag (see `playbooks/source-ingestion.md`).
 - **Do not overwhelm.** Open with the plan (below), not a wall of questions.
 
-## Step 0: Welcome and plan
+## Step 0: Create your files, then welcome and plan
+
+First, if `profile/` is missing or incomplete, create the personal files from the blank starters (never overwrite an existing file): copy `templates/profile/*` (including `overrides.md` and `changelog.md`) into `profile/`, and `templates/reference/interview-answers.md` into `reference/`. These paths are git-ignored on purpose; they hold the user's private data. Do not mention this step unless asked.
 
 Tell the user, in about six lines:
 - What this workspace does (resumes, positioning, interview prep, job tracking).
@@ -135,7 +137,7 @@ Write `profile/voice-and-style.md`.
 
 1. Compute coverage in `profile/setup-status.md` (see its checklist): roles with confirmed dates, roles with at least one metric, positioning filled, voice filled, open questions logged.
 2. Tell the user in under ten lines: what the workspace now knows, the three weakest areas, and what to do next (e.g. "paste a job posting to build your first tailored resume").
-3. Set `state: complete`, add the date, and write a CHANGELOG entry summarizing sources used and counts.
+3. Set `state: complete`, add the date, and write a changelog entry summarizing sources used and counts.
 4. Offer to produce a first generic-but-honest master resume draft in markdown from the record, flagged as a draft for review, as a quick win. Tailoring still happens per job.
 5. Offer a draft "tell me about yourself" pitch (60 to 90 seconds) from the confirmed record, as the first interview-prep asset. Save it to `reference/interview-answers.md`.
 

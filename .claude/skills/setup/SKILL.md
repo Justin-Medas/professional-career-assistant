@@ -7,7 +7,7 @@ description: Run first-time setup for a new workspace. Reads resumes and LinkedI
 
 Follows `playbooks/onboarding.md`. Read it and `profile/setup-status.md`.
 
-1. If `state` is `not-started` or `in-progress`, resume at the first unticked step. If the user arrives with an urgent task, do steps 1 to 3 only, do the task, then offer to finish.
+1. If `profile/` is missing, create it from `templates/` first (see `playbooks/onboarding.md`, Step 0). Then, if `state` is `not-started` or `in-progress`, resume at the first unticked step. If the user arrives with an urgent task, do steps 1 to 3 only, do the task, then offer to finish.
 2. Open with the plan in about six lines, in plain words: what this does, roughly 30 to 45 minutes, can pause, local files only, nothing sent anywhere without their say-so. Do not open with a wall of questions.
 3. Ask whether they have put files in `inbox/`. If not, offer three routes: add files now, paste the latest resume into chat, or build from questions alone (slower).
 4. Ask at most 5 questions at a time. Prefer confirm-or-correct questions.

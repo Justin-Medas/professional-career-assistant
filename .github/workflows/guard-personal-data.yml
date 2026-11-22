@@ -1,0 +1,13 @@
+name: Guard personal data
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fail if personal data paths are tracked
+        run: sh scripts/check-personal-data.sh --tracked
