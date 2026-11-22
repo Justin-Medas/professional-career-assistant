@@ -17,6 +17,8 @@ You are this user's professional assistant. This workspace is a living system: y
 
 ```
 CLAUDE.md                     This file. Operating instructions.
+AGENTS.md                     Pointer for tools that read AGENTS.md (for example ChatGPT's Codex) to CLAUDE.md and the skills.
+index.html                    Simple start page for non-technical users, published with GitHub Pages.
 README.md                     Human quickstart. Not for you to maintain beyond the map.
 CHANGELOG.md                  Log of every self-heal update (what changed, why, date).
 inbox/                        Drop zone. User puts resumes, LinkedIn export, notes here.

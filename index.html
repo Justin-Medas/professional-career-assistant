@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Professional Assistant: your AI career coach</title>
+<meta name="description" content="An open-source career assistant that runs in Claude or ChatGPT on your own computer. Tailored resumes, interview prep, and interactive study guides for presentations and case studies.">
+<style>
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5b6876; --line: #d9dfe5;
+  --accent: #1f5fbf; --accent-ink: #ffffff; --accent-soft: #e3edfb; --good: #1b7048; --good-soft: #d9f1e3;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f151c; --surface: #17212b; --ink: #e8eef3; --muted: #9aa8b5; --line: #2b3a47;
+    --accent: #6ea8ff; --accent-ink: #07111f; --accent-soft: #14283f; --good: #5fcf94; --good-soft: #12301f;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.6 var(--font);
+  padding: 0 max(18px, env(safe-area-inset-right, 0px)) 64px max(18px, env(safe-area-inset-left, 0px)); }
+.wrap { max-width: 820px; margin: 0 auto; }
+h1 { font-size: clamp(2rem, 6vw, 3rem); line-height: 1.1; margin: 0 0 14px; text-wrap: balance; }
+h2 { font-size: 1.5rem; line-height: 1.2; margin: 44px 0 14px; }
+h3 { font-size: 1.05rem; margin: 0 0 6px; }
+p { margin: 0 0 12px; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.hero { padding: 56px 0 8px; }
+.lede { font-size: 1.2rem; color: var(--muted); max-width: 40ch; }
+.eyebrow { font: 600 0.75rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+.btn { display: inline-block; background: var(--accent); color: var(--accent-ink); text-decoration: none; font-weight: 600;
+  padding: 14px 22px; border-radius: 10px; }
+.btn:hover { filter: brightness(1.08); }
+.btn.alt { background: transparent; color: var(--accent); border: 2px solid var(--accent); padding: 12px 20px; }
+.row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; }
+.grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.steps { list-style: none; padding: 0; margin: 0; counter-reset: s; display: grid; gap: 14px; }
+.steps > li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 18px 20px 18px 66px; position: relative; }
+.steps > li::before { content: counter(s); position: absolute; left: 18px; top: 16px; width: 34px; height: 34px; border-radius: 50%;
+  background: var(--accent); color: var(--accent-ink); font-weight: 700; display: grid; place-items: center; }
+.steps h3 { margin-top: 2px; }
+.tip { background: var(--accent-soft); border-radius: 8px; padding: 10px 14px; margin-top: 10px; font-size: 0.95rem; }
+.say { font: 500 1rem var(--mono); background: var(--good-soft); color: var(--good); border-radius: 8px; padding: 10px 14px; display: block; margin: 8px 0; }
+code { font: 0.92em var(--mono); background: var(--accent-soft); padding: 1px 6px; border-radius: 4px; }
+table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+tr:last-child td { border-bottom: 0; }
+.muted { color: var(--muted); }
+footer { margin-top: 56px; color: var(--muted); font-size: 0.9rem; }
+@media (max-width: 560px) { .steps > li { padding-left: 58px; } th:nth-child(2), td:nth-child(2) { display: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">Open source</div>
+  <h1>A career coach that lives on your computer.</h1>
+  <p class="lede">Tailored resumes, interview prep, and study guides for big presentations and case studies. You talk to it in plain English. No coding.</p>
+  <div class="row">
+    <a class="btn" href="https://github.com/Justin-Medas/professional-career-assistant/archive/refs/heads/main.zip">Download (zip file)</a>
+    <a class="btn alt" href="examples/sample-study-guide-frontend-platform.html">Try a sample study guide</a>
+  </div>
+</header>
+
+<h2>Get started in four steps</h2>
+<ol class="steps">
+  <li>
+    <h3>Download and unzip</h3>
+    <p>Click <strong>Download (zip file)</strong> above. When it finishes, double-click the file to unzip it (on Windows, right-click and choose Extract All). You will get a folder called <code>professional-career-assistant-main</code>.</p>
+    <p>Move that folder somewhere you can find it, like Documents.</p>
+    <div class="tip"><strong>Tip:</strong> Open the folder, find the one called <code>inbox</code>, and drop in your resumes first. The more it can read, the fewer questions it asks you.</div>
+  </li>
+  <li>
+    <h3>Open your AI app</h3>
+    <p>You need the desktop app, and an account, for one of these. Your plan has to include its coding mode.</p>
+    <div class="grid">
+      <div class="card"><h3>Claude (recommended)</h3><p class="muted">Best tested. Open the Claude app and switch to the <strong>Code</strong> tab.</p></div>
+      <div class="card"><h3>ChatGPT</h3><p class="muted">Works through Codex, ChatGPT's coding mode. Less tested, so if something is off, report it on the GitHub page.</p></div>
+    </div>
+  </li>
+  <li>
+    <h3>Choose the folder</h3>
+    <p>In the coding tab, choose the option to open or add a folder, and pick the one you unzipped. This lets the assistant read the instructions and your files, and keeps everything on your computer.</p>
+  </li>
+  <li>
+    <h3>Say hello</h3>
+    <p>Type something like:</p>
+    <span class="say">Hi, help me get started.</span>
+    <p>It will explain what it is about to do and take you through a short setup, about 30 to 45 minutes. You can pause and pick it up later.</p>
+  </li>
+</ol>
+
+<h2>After setup, just say what you need</h2>
+<p class="muted">You do not have to remember any commands. It notices what you are facing and offers the right help.</p>
+<table>
+  <thead><tr><th>You say</th><th>What happens</th></tr></thead>
+  <tbody>
+    <tr><td>"Here is a job I want" and a link</td><td>Researches the role, checks how well you match, then offers a tailored resume</td></tr>
+    <tr><td>"A recruiter wants to talk Thursday"</td><td>Builds your pitch, likely questions, and what to ask them</td></tr>
+    <tr><td>"I have a 90-minute case presentation next week"</td><td>Asks what it needs, then builds an interactive study guide with flashcards and a timed practice run</td></tr>
+    <tr><td>"I am nervous about the panel"</td><td>Runs a mock interview, one question at a time, with feedback</td></tr>
+    <tr><td>"I just finished the interview"</td><td>Captures what happened and drafts thank-you notes. It never sends anything without your yes.</td></tr>
+  </tbody>
+</table>
+
+<h2>Common questions</h2>
+<div class="grid">
+  <div class="card"><h3>Is my information private?</h3><p>Your files stay in the folder on your computer and are not uploaded anywhere by this project. The AI app reads them to help you, under that app's own privacy terms. Keep your copy private and do not post it publicly.</p></div>
+  <div class="card"><h3>Do I need to know how to code?</h3><p>No. You never edit files or type commands. If it needs something from you, it asks in plain language.</p></div>
+  <div class="card"><h3>Will it make things up?</h3><p>It is built not to. Anything it is unsure about becomes a question for you, and it will not send a message on your behalf without a clear yes.</p></div>
+  <div class="card"><h3>Can I use it for something other than job hunting?</h3><p>The study guides work for any high-stakes presentation or exam prep. Tell it what you are preparing for.</p></div>
+</div>
+
+<footer>
+  <p>Open source under the MIT license. <a href="https://github.com/Justin-Medas/professional-career-assistant">View the project on GitHub</a>.</p>
+</footer>
+
+</div>
+</body>
+</html>
