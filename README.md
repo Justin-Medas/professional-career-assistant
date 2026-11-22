@@ -90,6 +90,10 @@ If your Claude setup has Google Drive, Gmail, or a browser extension connected, 
 - `templates/` holds blank starter files. Setup copies them into `profile/` and `reference/`, which are git-ignored, so your personal data can never be committed with the shared code. A guard in `scripts/` and `.github/` blocks it even if someone tries.
 - `profile/overrides.md` is where your own preferences and tweaks go. It is yours alone.
 
+## Contributing: bring your field
+
+This began with software and product careers, but the method works anywhere. If you work in customer experience, corporate events, project management, sales, healthcare, education, or another field, you can add what you know: what hiring managers expect, typical interview stages, keywords, assessments, pay norms. No coding needed. See [CONTRIBUTING.md](CONTRIBUTING.md) for what to add, where it goes, and how to submit it. Your personal files stay out of anything you share.
+
 ## Adding other domains
 
 A side business, consulting practice, or anything else you want help with: tell it, and it creates a folder under `ventures/`.
